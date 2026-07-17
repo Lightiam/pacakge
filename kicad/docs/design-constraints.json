@@ -1,0 +1,240 @@
+{
+  "project": {
+    "name": "LightRail AI NCE",
+    "version": "1.0",
+    "description": "Neural Computing Engine Motherboard - Reference Design",
+    "date": "2026-07-17"
+  },
+
+  "board": {
+    "form_factor": "PCIe x16 Full-Height Dual-Slot",
+    "dimensions": {
+      "length_mm": 267,
+      "width_mm": 111,
+      "thickness_mm": 2.4
+    },
+    "layers": 10,
+    "material": "FR-4 Tg170"
+  },
+
+  "power_budget": {
+    "total_power_w": 225,
+    "peak_power_w": 275,
+    "idle_power_w": 15,
+    "input_sources": [
+      {
+        "type": "PCIe_x16_slot",
+        "voltage_12v_a": 12.5,
+        "voltage_5v_a": 3,
+        "voltage_3v3_a": 3,
+        "power_w": 75
+      },
+      {
+        "type": "PEX_8pin",
+        "voltage_12v_a": 40,
+        "voltage_5v_a": 20,
+        "power_w": 225
+      },
+      {
+        "type": "PEX_6pin_optional",
+        "voltage_12v_a": 20,
+        "voltage_5v_a": 10,
+        "power_w": 120
+      }
+    ]
+  },
+
+  "power_rails": [
+    {
+      "name": "VDD_CORE",
+      "voltage_v": 0.9,
+      "tolerance_percent": 3,
+      "max_current_a": 210,
+      "source": "PDM_12phase",
+      "description": "GPU core processor supply"
+    },
+    {
+      "name": "VDD_MEM",
+      "voltage_v": 1.2,
+      "tolerance_percent": 3,
+      "max_current_a": 75,
+      "source": "PDM_auxiliary",
+      "description": "HBM3 memory supply"
+    },
+    {
+      "name": "VDD_5V",
+      "voltage_v": 5.0,
+      "tolerance_percent": 5,
+      "max_current_a": 20,
+      "source": "PEX_input",
+      "description": "Auxiliary (fans, sensors)"
+    },
+    {
+      "name": "VDD_3V3",
+      "voltage_v": 3.3,
+      "tolerance_percent": 5,
+      "max_current_a": 2.5,
+      "source": "LDO_regulator",
+      "description": "Logic supply"
+    },
+    {
+      "name": "VDD_1V8",
+      "voltage_v": 1.8,
+      "tolerance_percent": 5,
+      "max_current_a": 1.5,
+      "source": "LDO_regulator",
+      "description": "JTAG/I2C logic"
+    }
+  ],
+
+  "dfm_targets": {
+    "manufacturer": "Professional_PCB_Fab",
+    "trace_width_min_mm": 0.1,
+    "trace_spacing_min_mm": 0.1,
+    "via_diameter_mm": 0.3,
+    "via_drill_mm": 0.15,
+    "annular_ring_mm": 0.15,
+    "impedance_control": true,
+    "impedance_tolerance_ohm": 10,
+    "differential_pair_impedance_ohm": 100,
+    "single_ended_impedance_ohm": 50,
+    "thermal_via_requirements": true
+  },
+
+  "layer_stackup": {
+    "layer_1": {
+      "type": "signal",
+      "thickness_um": 35,
+      "copper_weight": "0.5oz",
+      "description": "PCIe signals, escape routing"
+    },
+    "layer_2": {
+      "type": "plane",
+      "thickness_um": 70,
+      "copper_weight": "2oz",
+      "voltage": "VDD_CORE",
+      "description": "Core power plane"
+    },
+    "layer_3": {
+      "type": "signal",
+      "thickness_um": 35,
+      "copper_weight": "0.5oz",
+      "description": "Differential pairs (PCIe, memory)"
+    },
+    "layer_4": {
+      "type": "plane",
+      "thickness_um": 70,
+      "copper_weight": "2oz",
+      "voltage": "GND",
+      "description": "Ground reference plane"
+    },
+    "layer_5": {
+      "type": "signal",
+      "thickness_um": 70,
+      "copper_weight": "1oz",
+      "description": "Power delivery, memory signals"
+    },
+    "layer_6": {
+      "type": "plane",
+      "thickness_um": 70,
+      "copper_weight": "2oz",
+      "voltage": "VDD_1V2",
+      "description": "Memory/auxiliary power"
+    },
+    "layer_7": {
+      "type": "signal",
+      "thickness_um": 35,
+      "copper_weight": "0.5oz",
+      "description": "Memory interface, debug, I2C"
+    },
+    "layer_8": {
+      "type": "plane",
+      "thickness_um": 70,
+      "copper_weight": "2oz",
+      "voltage": "GND",
+      "description": "Ground return (PDM)"
+    },
+    "layer_9": {
+      "type": "signal",
+      "thickness_um": 35,
+      "copper_weight": "0.5oz",
+      "description": "Fan control, LED, sensor signals"
+    },
+    "layer_10": {
+      "type": "signal",
+      "thickness_um": 35,
+      "copper_weight": "0.5oz",
+      "description": "Component bottom routing"
+    }
+  },
+
+  "high_speed_interfaces": [
+    {
+      "name": "PCIe_Gen4_x16",
+      "data_rate_gt_s": 16,
+      "lanes": 16,
+      "differential_impedance_ohm": 100,
+      "length_match_mil": 20,
+      "via_stitching_required": true,
+      "eye_diagram_requirement": "Compliant to PCIe 4.0 spec"
+    },
+    {
+      "name": "HBM3_Memory_DDR",
+      "frequency_ghz": 2.4,
+      "data_width_bits": 1024,
+      "ddr_rate_gb_s": 256,
+      "clock_type": "source_sync",
+      "differential_impedance_ohm": 100,
+      "setup_time_ns": 0.3,
+      "hold_time_ns": 0.2
+    },
+    {
+      "name": "Core_Clock_Distribution",
+      "frequency_ghz": 2.4,
+      "source": "internal_PLL",
+      "jitter_ps_rms": 2,
+      "skew_max_ps": 50
+    }
+  ],
+
+  "thermal": {
+    "max_power_dissipation_w": 275,
+    "die_temperature_max_c": 100,
+    "die_temperature_throttle_c": 85,
+    "thermal_resistance_die_to_case": 0.15,
+    "thermal_resistance_case_to_air": 0.25,
+    "ambient_temp_max_c": 55,
+    "cooling_method": "dual_40mm_fans_heatspreader",
+    "thermal_interface_material": "Arctic_MX-4"
+  },
+
+  "components": [
+    {
+      "type": "Main_ASIC",
+      "part_number": "LR-GEN3-NPU-5NM",
+      "package": "BGA-3136",
+      "power_dissipation_w": 210,
+      "priority": "Critical - Central placement"
+    },
+    {
+      "type": "Memory_HBM3",
+      "part_number": "H58M16ABHX",
+      "package": "Stack",
+      "quantity": 12,
+      "power_dissipation_w": 15,
+      "priority": "Critical - Adjacent to ASIC"
+    },
+    {
+      "type": "PWM_Controller",
+      "part_number": "MP5949",
+      "quantity": 1,
+      "priority": "Critical - Near input connector"
+    },
+    {
+      "type": "Phase_FET",
+      "part_number": "CSD95481RWJ",
+      "quantity": 24,
+      "priority": "High - Distributed around ASIC"
+    }
+  ]
+}

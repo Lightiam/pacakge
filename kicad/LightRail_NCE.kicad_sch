@@ -1,0 +1,118 @@
+(kicad_sch (version 20230121)
+
+  (uuid "d0000000-0000-0000-0000-000000000000")
+
+  (paper "A4")
+
+  (title_block
+    (title "LightRail AI NCE - Reference Design")
+    (date "2026-07-17")
+    (rev "A")
+    (company "LightRail AI")
+    (comment 1 "Neural Computing Engine Motherboard")
+    (comment 2 "PCIe x16 Accelerator Card")
+    (comment 3 "10-Layer, High-Speed Design")
+    (comment 4 "Manufacturing Reference")
+  )
+
+  (lib_symbols
+    (symbol "Connector_PCIe_x16" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 5.08 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (property "Value" "PCIe_x16" (at 0 -5.08 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (symbol "Connector_PCIe_x16_1_1"
+        (rectangle (start -10.16 5.08) (end 10.16 -5.08)
+          (stroke (width 0.254)) (fill (color 255 255 255 0)))
+      )
+    )
+
+    (symbol "Power_Main_ASIC" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 10.16 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (property "Value" "LR-GEN3-NPU" (at 0 -10.16 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (symbol "Power_Main_ASIC_1_1"
+        (rectangle (start -8.89 8.89) (end 8.89 -8.89)
+          (stroke (width 0.254)) (fill (color 200 200 255 0)))
+        (text "LR-GEN3-NPU" (at 0 0 0)
+          (effects (font (size 1.27 1.27) (thickness 0.15))))
+      )
+    )
+
+    (symbol "Memory_HBM3_Stack" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 5.08 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (property "Value" "H58M16ABHX" (at 0 -5.08 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (symbol "Memory_HBM3_Stack_1_1"
+        (rectangle (start -5.08 4.57) (end 5.08 -4.57)
+          (stroke (width 0.254)) (fill (color 200 255 200 0)))
+      )
+    )
+
+    (symbol "PDM_Controller" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 3.81 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (property "Value" "MP5949" (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (symbol "PDM_Controller_1_1"
+        (rectangle (start -3.81 3.81) (end 3.81 -3.81)
+          (stroke (width 0.254)) (fill (color 255 200 200 0)))
+      )
+    )
+
+    (symbol "Power_Input_Connector" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 3.81 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (property "Value" "PEX_8pin" (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27) (thickness 0.15))))
+      (symbol "Power_Input_Connector_1_1"
+        (rectangle (start -3.81 3.81) (end 3.81 -3.81)
+          (stroke (width 0.254)) (fill (color 255 255 200 0)))
+      )
+    )
+  )
+
+  (junction (at 50.8 50.8) (diameter 0.9144) (color 0 0 0 0)
+    (uuid "00000000-0000-0000-0000-000000000001")
+  )
+
+  (no_connect (at 50.8 50.8) (uuid "00000000-0000-0000-0000-000000000002"))
+
+  (wire (pts (xy 50.8 50.8) (xy 60.96 50.8))
+    (stroke (width 0) (type default)) (uuid "00000000-0000-0000-0000-000000000003")
+  )
+
+  (global_label "GND" (shape input) (at 25.4 25.4 180)
+    (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right))
+    (uuid "00000000-0000-0000-0000-000000000004")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27) (thickness 0.15)) hide))
+  )
+
+  (global_label "VDD_12V" (shape input) (at 25.4 20.32 180)
+    (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right))
+    (uuid "00000000-0000-0000-0000-000000000005")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27) (thickness 0.15)) hide))
+  )
+
+  (global_label "VDD_CORE" (shape input) (at 25.4 15.24 180)
+    (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right))
+    (uuid "00000000-0000-0000-0000-000000000006")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27) (thickness 0.15)) hide))
+  )
+
+  (global_label "VDD_MEM" (shape input) (at 25.4 10.16 180)
+    (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right))
+    (uuid "00000000-0000-0000-0000-000000000007")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27) (thickness 0.15)) hide))
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

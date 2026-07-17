@@ -1,0 +1,540 @@
+(kicad_pcb (version 20240108)
+  (host kicad 8.0.0)
+  (general
+    (thickness 2.4)
+    (legacy_teardrops no)
+  )
+  (paper "A4")
+  (title_block
+    (title "LightRail AI NCE - PCB Layout")
+    (date "2026-07-17")
+    (rev "A")
+    (company "LightRail AI")
+    (comment 1 "Neural Computing Engine Motherboard")
+    (comment 2 "PCIe x16 Accelerator - 10-Layer Design")
+    (comment 3 "Based on NVIDIA RTX 2080 Architecture")
+    (comment 4 "LR-GEN3-NPU Central ASIC")
+  )
+
+  (layers
+    (0 "F.Cu" signal)
+    (1 "In1.Cu" power)
+    (2 "In2.Cu" signal)
+    (3 "In3.Cu" power)
+    (4 "In4.Cu" signal)
+    (5 "In5.Cu" power)
+    (6 "In6.Cu" signal)
+    (7 "In7.Cu" power)
+    (8 "B.Cu" signal)
+    (9 "B.Mask" user)
+    (10 "F.Mask" user)
+    (11 "B.Silkscreen" user)
+    (12 "F.Silkscreen" user)
+  )
+
+  (setup
+    (stackup
+      (layer "F.SilkS" (type "Top Silk Screen"))
+      (layer "F.Mask" (type "Top Solder Mask") (thickness 0.01))
+      (layer "F.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 1" (type "core") (thickness 0.1245) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In1.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 2" (type "prepreg") (thickness 0.0762) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In2.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 3" (type "core") (thickness 0.1245) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In3.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 4" (type "prepreg") (thickness 0.0762) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In4.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 5" (type "core") (thickness 0.1245) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In5.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 6" (type "prepreg") (thickness 0.0762) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In6.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 7" (type "core") (thickness 0.1245) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "In7.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 8" (type "prepreg") (thickness 0.0762) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "B.Cu" (type "copper") (thickness 0.035))
+      (layer "B.Mask" (type "Bottom Solder Mask") (thickness 0.01))
+      (layer "B.SilkS" (type "Bottom Silk Screen"))
+    )
+    (br_track_width 0.25)
+    (br_track_gap 0.25)
+  )
+
+  (net 0 "")
+  (net 1 "GND")
+  (net 2 "VDD_12V")
+  (net 3 "VDD_CORE")
+  (net 4 "VDD_MEM")
+  (net 5 "VDD_5V")
+  (net 6 "VDD_3V3")
+  (net 7 "VDD_1V8")
+  (net 8 "PCIe_RX0")
+  (net 9 "PCIe_TX0")
+  (net 10 "HBM3_CLK")
+  (net 11 "JTAG_TCK")
+  (net 12 "JTAG_TDO")
+
+  (footprint "BGA-3136:BGA-3136_23x23_0.8mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-100000000001")
+    (at 133.35 55.88 0)
+    (descr "LR-GEN3-NPU, 5nm Neural Processor, 3136-pin BGA, 23x23mm, 0.8mm pitch")
+    (tags "BGA LR-GEN3-NPU ASIC")
+    (property "Reference" "U1"
+      (at 0 -15 0)
+      (layer "F.Silkscreen")
+      (effects
+        (font (size 1.27 1.27) (thickness 0.15))
+        (justify center)
+      )
+    )
+    (property "Value" "LR-GEN3-NPU-5NM"
+      (at 0 15 0)
+      (layer "F.Silkscreen")
+      (effects
+        (font (size 1.27 1.27) (thickness 0.15))
+        (justify center)
+      )
+    )
+    (property "Datasheet" "LR-GEN3-NPU-DS-v2.3.pdf"
+      (at 0 0 0)
+      (unlocked)
+      (layer "F.Silkscreen")
+      (hide yes)
+      (effects
+        (font (size 1.27 1.27) (thickness 0.15))
+      )
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000001")
+    (at 100.0 40.0 0)
+    (descr "HBM3 Memory Stack S0, SK Hynix H58M16ABHX, 16Gb")
+    (property "Reference" "U2"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (property "Value" "H58M16ABHX-S0"
+      (at 0 8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000002")
+    (at 115.0 40.0 0)
+    (descr "HBM3 Memory Stack S1")
+    (property "Reference" "U3"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000003")
+    (at 130.0 40.0 0)
+    (descr "HBM3 Memory Stack S2")
+    (property "Reference" "U4"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000004")
+    (at 145.0 40.0 0)
+    (descr "HBM3 Memory Stack S3")
+    (property "Reference" "U5"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000005")
+    (at 160.0 40.0 0)
+    (descr "HBM3 Memory Stack S4")
+    (property "Reference" "U6"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000006")
+    (at 175.0 40.0 0)
+    (descr "HBM3 Memory Stack S5")
+    (property "Reference" "U7"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000007")
+    (at 100.0 72.0 0)
+    (descr "HBM3 Memory Stack S6 (Right side)")
+    (property "Reference" "U8"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000008")
+    (at 115.0 72.0 0)
+    (descr "HBM3 Memory Stack S7")
+    (property "Reference" "U9"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000009")
+    (at 130.0 72.0 0)
+    (descr "HBM3 Memory Stack S8")
+    (property "Reference" "U10"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000010")
+    (at 145.0 72.0 0)
+    (descr "HBM3 Memory Stack S9")
+    (property "Reference" "U11"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000011")
+    (at 160.0 72.0 0)
+    (descr "HBM3 Memory Stack S10")
+    (property "Reference" "U12"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "BGA-1024:BGA-1024_13x10.5_0.04mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-200000000012")
+    (at 175.0 72.0 0)
+    (descr "HBM3 Memory Stack S11")
+    (property "Reference" "U13"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "QFN-48:QFN-48_7x7_0.5mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-300000000001")
+    (at 50.0 15.0 0)
+    (descr "MP5949 12-Phase PWM Controller")
+    (property "Reference" "U20"
+      (at 0 -5 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+    (property "Value" "MP5949"
+      (at 0 5 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+  )
+
+  (footprint "TSSOP-20:TSSOP-20"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-300000000002")
+    (at 75.0 15.0 0)
+    (descr "INA3221 Voltage Monitor IC")
+    (property "Reference" "U21"
+      (at 0 -4 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.7 0.7) (thickness 0.1)))
+    )
+    (property "Value" "INA3221"
+      (at 0 4 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.7 0.7) (thickness 0.1)))
+    )
+  )
+
+  (footprint "QFN-48:QFN-48_6x6_0.5mm"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-300000000003")
+    (at 100.0 15.0 0)
+    (descr "NCT6798D Thermal Controller")
+    (property "Reference" "U22"
+      (at 0 -4 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.7 0.7) (thickness 0.1)))
+    )
+    (property "Value" "NCT6798D"
+      (at 0 4 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.7 0.7) (thickness 0.1)))
+    )
+  )
+
+  (footprint "PK_8x8:PK_8x8"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-400000000001")
+    (at 35.0 35.0 0)
+    (descr "CSD95481RWJ High-Side FET Phase 0")
+    (property "Reference" "Q1"
+      (at 0 -5 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.6 0.6) (thickness 0.1)))
+    )
+  )
+
+  (footprint "PK_8x8:PK_8x8"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-400000000002")
+    (at 40.0 35.0 0)
+    (descr "CSD95481RWJ Low-Side FET Phase 0")
+    (property "Reference" "Q2"
+      (at 0 -5 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.6 0.6) (thickness 0.1)))
+    )
+  )
+
+  (footprint "Connector_EdgeConnector:PCI_Express_x16"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-500000000001")
+    (at 0.0 55.88 0)
+    (descr "PCIe x16 Edge Connector (164-pin)")
+    (property "Reference" "J1"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1.5 1.5) (thickness 0.2)))
+    )
+    (property "Value" "PCIe_x16"
+      (at 0 8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1.5 1.5) (thickness 0.2)))
+    )
+  )
+
+  (footprint "Connector_Molex_5559:Molex_5559_8pin"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-500000000002")
+    (at 250.0 70.0 0)
+    (descr "8-pin PEX Auxiliary Power Connector")
+    (property "Reference" "J2"
+      (at 0 -8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (property "Value" "PEX_8pin"
+      (at 0 8 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+  )
+
+  (footprint "Connector_Molex_5559:Molex_5559_6pin"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-500000000003")
+    (at 250.0 50.0 0)
+    (descr "6-pin PEX Secondary Power (Optional)")
+    (property "Reference" "J3"
+      (at 0 -6 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+    (property "Value" "PEX_6pin"
+      (at 0 6 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+  )
+
+  (footprint "Header_2x7:Header_2x7"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-500000000004")
+    (at 250.0 30.0 0)
+    (descr "14-pin JTAG Debug Header")
+    (property "Reference" "J4"
+      (at 0 -5 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+    (property "Value" "JTAG_14pin"
+      (at 0 5 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+  )
+
+  (gr_rect (start 0 0) (end 267 111.76)
+    (stroke (width 0.1) (type solid)) (fill none) (layer "Edge.Cuts")
+    (uuid "00000000-0000-0000-0000-600000000001")
+  )
+
+  (gr_text "LightRail AI NCE - PCB Layout Rev A" (at 133.5 5 0)
+    (layer "F.Silkscreen")
+    (uuid "00000000-0000-0000-0000-700000000001")
+    (effects
+      (font (size 2 2) (thickness 0.3))
+      (justify center)
+    )
+  )
+
+  (gr_text "CORE (0.9V)\nPower Plane" (at 60 30 0)
+    (layer "F.Silkscreen")
+    (uuid "00000000-0000-0000-0000-700000000002")
+    (effects
+      (font (size 1 1) (thickness 0.15))
+      (justify center)
+    )
+  )
+
+  (gr_text "HBM3 Memory Stacks (Left S0-S5)" (at 137.5 32 0)
+    (layer "F.Silkscreen")
+    (uuid "00000000-0000-0000-0000-700000000003")
+    (effects
+      (font (size 1.2 1.2) (thickness 0.15))
+      (justify center)
+    )
+  )
+
+  (gr_text "HBM3 Memory Stacks (Right S6-S11)" (at 137.5 80 0)
+    (layer "F.Silkscreen")
+    (uuid "00000000-0000-0000-0000-700000000004")
+    (effects
+      (font (size 1.2 1.2) (thickness 0.15))
+      (justify center)
+    )
+  )
+
+  (gr_text "LR-GEN3-NPU ASIC (Center)" (at 133.35 55.88 0)
+    (layer "F.Silkscreen")
+    (uuid "00000000-0000-0000-0000-700000000005")
+    (effects
+      (font (size 1.2 1.2) (thickness 0.15))
+      (justify center)
+    )
+  )
+
+  (gr_text "Fans & Thermal Management" (at 200 10 0)
+    (layer "F.Silkscreen")
+    (uuid "00000000-0000-0000-0000-700000000006")
+    (effects
+      (font (size 1 1) (thickness 0.12))
+    )
+  )
+
+  (footprint "Conn_01x02_Pin:Conn_01x02_Pin"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-800000000001")
+    (at 200.0 20.0 0)
+    (descr "Fan Connector 1 (PWM)")
+    (property "Reference" "J5"
+      (at 0 -3 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.7 0.7) (thickness 0.1)))
+    )
+  )
+
+  (footprint "Conn_01x02_Pin:Conn_01x02_Pin"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-800000000002")
+    (at 220.0 20.0 0)
+    (descr "Fan Connector 2 (PWM)")
+    (property "Reference" "J6"
+      (at 0 -3 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.7 0.7) (thickness 0.1)))
+    )
+  )
+
+  (footprint "LED_SMD:LED_1206_3216Metric"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-800000000003")
+    (at 200.0 10.0 0)
+    (descr "Status LED - Power OK (Green)")
+    (property "Reference" "D1"
+      (at 0 -2 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.6 0.6) (thickness 0.1)))
+    )
+  )
+
+  (footprint "LED_SMD:LED_1206_3216Metric"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-800000000004")
+    (at 210.0 10.0 0)
+    (descr "Status LED - Thermal (Yellow)")
+    (property "Reference" "D2"
+      (at 0 -2 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.6 0.6) (thickness 0.1)))
+    )
+  )
+
+  (footprint "LED_SMD:LED_1206_3216Metric"
+    (layer "F.Cu")
+    (uuid "00000000-0000-0000-0000-800000000005")
+    (at 220.0 10.0 0)
+    (descr "Status LED - Activity (Blue)")
+    (property "Reference" "D3"
+      (at 0 -2 0)
+      (layer "F.Silkscreen")
+      (effects (font (size 0.6 0.6) (thickness 0.1)))
+    )
+  )
+
+  (zone (net 1) (net_name "GND") (layer "In2.Cu") (tstamp "00000000-0000-0000-0000-900000000001")
+    (hatch edge 0.508)
+    (connect_pads (clearance 0.15))
+    (min_thickness 0.25)
+    (filled_areas_thickness 0.01)
+  )
+
+  (zone (net 3) (net_name "VDD_CORE") (layer "In1.Cu") (tstamp "00000000-0000-0000-0000-900000000002")
+    (hatch edge 0.508)
+    (connect_pads (clearance 0.15))
+    (min_thickness 0.25)
+    (filled_areas_thickness 0.01)
+  )
+
+  (zone (net 4) (net_name "VDD_MEM") (layer "In5.Cu") (tstamp "00000000-0000-0000-0000-900000000003")
+    (hatch edge 0.508)
+    (connect_pads (clearance 0.15))
+    (min_thickness 0.25)
+    (filled_areas_thickness 0.01)
+  )
+)
