@@ -1,0 +1,23 @@
+{
+  "name": "lightrail-nce-dashboard",
+  "version": "1.0.0",
+  "description": "LightRail NCE Monitoring Dashboard",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "build": "echo 'Build complete'",
+    "test": "echo 'Running tests...'"
+  },
+  "keywords": [
+    "ai",
+    "neural-compute",
+    "monitoring"
+  ],
+  "author": "LightRail AI",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {}
+}
