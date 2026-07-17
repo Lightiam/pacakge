@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LightRail AI NCE - Reference Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            max-width: 8.5in;
+            height: 11in;
+            margin: 0.5in;
+            padding: 0.75in;
+        }
+
+        .page {
+            page-break-after: always;
+            margin-bottom: 1in;
+            padding: 0.5in;
+            border: 1px solid #ddd;
+        }
+
+        .title-page {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            border: 2px solid #003f7f;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+
+        .title-page h1 {
+            font-size: 3em;
+            color: #003f7f;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .title-page h2 {
+            font-size: 1.8em;
+            color: #0066cc;
+            margin: 15px 0;
+        }
+
+        .title-page p {
+            font-size: 1.1em;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .version-info {
+            margin-top: 50px;
+            border-top: 2px solid #003f7f;
+            padding-top: 30px;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: #003f7f;
+            margin: 30px 0 20px 0;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            color: #0066cc;
+            margin: 20px 0 15px 0;
+            border-left: 5px solid #0066cc;
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin: 15px 0 10px 0;
+        }
+
+        .section-number {
+            display: inline-block;
+            background: #003f7f;
+            color: white;
+            padding: 5px 10px;
+            margin-right: 10px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        table th {
+            background: #003f7f;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        table tr:hover {
+            background: #f0f0f0;
+        }
+
+        .diagram {
+            background: #f5f5f5;
+            border: 2px solid #ccc;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+
+        .block-diagram {
+            background: white;
+            border: 1px solid #999;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .spec-box {
+            background: #e8f4f8;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+            font-size: 0.95em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .toc {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .toc h2 {
+            border: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .toc ol {
+            margin-left: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 0.85em;
+            color: #666;
+            text-align: center;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .spec-item {
+            background: #f5f5f5;
+            padding: 12px;
+            border-left: 3px solid #0066cc;
+            border-radius: 3px;
+        }
+
+        .spec-item strong {
+            color: #003f7f;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .signature-block {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            font-size: 0.9em;
+        }
+
+        .signature-line {
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            text-align: center;
+        }
+
+        .page-number {
+            text-align: center;
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 30px;
+        }
+
+        .connector-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .connector-box {
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .connector-box h4 {
+            color: #003f7f;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0.75in;
+            }
+            .page {
+                page-break-after: always;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1: TITLE PAGE -->
+<div class="page title-page">
+    <div>
+        <h1>LIGHTRAIL AI NCE</h1>
+        <h2>Neural Computing Engine Motherboard</h2>
+        <p><strong>Reference Design Document</strong></p>
+        <p style="font-size: 1.3em; margin-top: 40px; color: #003f7f;">Complete PCB Design & Manufacturing Specification</p>
+
+        <div class="version-info">
+            <p><strong>Document Version:</strong> 1.0</p>
+            <p><strong>Document Date:</strong> July 17, 2026</p>
+            <p><strong>Status:</strong> Engineering Release</p>
+            <p><strong>Board Revision:</strong> A</p>
+            <p style="margin-top: 20px; font-size: 0.9em;"><strong>Classification:</strong> LightRail Proprietary - Manufacturer Use Only</p>
+            <p style="margin-top: 30px; font-size: 0.85em;">© 2026 LightRail AI. All rights reserved.<br>
+            This document contains proprietary information and specifications for the LightRail AI NCE Motherboard. Distribution restricted to authorized manufacturing partners.</p>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 2: TABLE OF CONTENTS -->
+<div class="page">
+    <h1>Table of Contents</h1>
+    <div class="toc">
+        <ol style="font-size: 1em;">
+            <li><strong>System Overview & Architecture</strong> - Page 3
+                <ol>
+                    <li>Product Description</li>
+                    <li>Key Features</li>
+                    <li>Block Diagram</li>
+                </ol>
+            </li>
+            <li><strong>Board Specifications</strong> - Page 4
+                <ol>
+                    <li>Physical Dimensions</li>
+                    <li>PCB Layer Stackup</li>
+                    <li>Environmental Compliance</li>
+                </ol>
+            </li>
+            <li><strong>Power Delivery System</strong> - Page 5
+                <ol>
+                    <li>Power Distribution Architecture</li>
+                    <li>Voltage Rails</li>
+                    <li>Power Delivery Module (PDM)</li>
+                    <li>Efficiency Specifications</li>
+                </ol>
+            </li>
+            <li><strong>PCIe Interface & Input Switching</strong> - Page 6
+                <ol>
+                    <li>PCIe Connector Specifications</li>
+                    <li>Input Protection</li>
+                    <li>Signal Integrity</li>
+                </ol>
+            </li>
+            <li><strong>Memory Subsystem</strong> - Page 7
+                <ol>
+                    <li>HBM3 Memory Configuration</li>
+                    <li>Memory Interface Schematic</li>
+                    <li>Bandwidth & Latency</li>
+                </ol>
+            </li>
+            <li><strong>Thermal Management</strong> - Page 8
+                <ol>
+                    <li>Thermal Design</li>
+                    <li>Cooling System</li>
+                    <li>Temperature Monitoring</li>
+                </ol>
+            </li>
+            <li><strong>Power Sequencing & Control</strong> - Page 9
+                <ol>
+                    <li>Power-On Reset Sequence</li>
+                    <li>Voltage Ramping</li>
+                    <li>Monitoring & Protection</li>
+                </ol>
+            </li>
+            <li><strong>Clock Distribution</strong> - Page 10
+                <ol>
+                    <li>Reference Oscillator</li>
+                    <li>PLL Architecture</li>
+                    <li>Clock Distribution Network</li>
+                </ol>
+            </li>
+            <li><strong>Debug Interface & Test</strong> - Page 11
+                <ol>
+                    <li>JTAG Configuration</li>
+                    <li>Boundary Scan</li>
+                    <li>Test Access Port</li>
+                </ol>
+            </li>
+            <li><strong>Electrical & Mechanical Details</strong> - Page 12-13
+                <ol>
+                    <li>Connector Pinouts</li>
+                    <li>Signal Routing Rules</li>
+                    <li>Component Placement</li>
+                    <li>Bill of Materials</li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 2
+    </div>
+</div>
+
+<!-- PAGE 3: SYSTEM OVERVIEW -->
+<div class="page">
+    <h1>1. System Overview & Architecture</h1>
+
+    <h2>1.1 Product Description</h2>
+    <p>The LightRail AI NCE (Neural Computing Engine) Motherboard is a high-performance compute accelerator designed for enterprise AI inference and training applications. This reference design provides complete specifications for PCB design, manufacturing, and assembly.</p>
+
+    <h2>1.2 Key Specifications</h2>
+    <div class="spec-grid">
+        <div class="spec-item">
+            <strong>Computing Power:</strong> 1.5 TFLOPS FP32 @ 2.4 GHz
+        </div>
+        <div class="spec-item">
+            <strong>Memory Bandwidth:</strong> 256 GB/s aggregate HBM3
+        </div>
+        <div class="spec-item">
+            <strong>Total Memory:</strong> 192GB (12x 16GB HBM3 stacks)
+        </div>
+        <div class="spec-item">
+            <strong>Power Delivery:</strong> 225W typical / 275W peak
+        </div>
+        <div class="spec-item">
+            <strong>Operating Frequency:</strong> 2.4 GHz nominal
+        </div>
+        <div class="spec-item">
+            <strong>Form Factor:</strong> Dual-slot PCI Express x16
+        </div>
+        <div class="spec-item">
+            <strong>Dimensions:</strong> 267mm × 111mm × 12mm
+        </div>
+        <div class="spec-item">
+            <strong>PCB Layers:</strong> 10-layer controlled impedance
+        </div>
+    </div>
+
+    <h2>1.3 High-Level System Architecture</h2>
+    <div class="diagram">
+    ┌─────────────────────────────────────────────────────────────┐
+    │           LightRail AI NCE Motherboard Architecture         │
+    ├─────────────────────────────────────────────────────────────┤
+    │                                                             │
+    │  ┌──────────────────┐          ┌──────────────────────┐    │
+    │  │  PCIe x16 Input  │          │  External Power (PEX)│    │
+    │  │  75W @ 5V/12V    │─┐        │  8-pin (225W)        │    │
+    │  └──────────────────┘ │    ┌───┤  6-pin (optional)    │    │
+    │                       │    │   └──────────────────────┘    │
+    │  ┌──────────────────────────────────────────────┐          │
+    │  │      Power Delivery Module (12-Phase PWM)    │          │
+    │  │  • 0.9V Core Rail @ 210A                    │          │
+    │  │  • 1.2V Memory Rail @ 75A                   │          │
+    │  │  • Efficiency: >92%                         │          │
+    │  └────────────────┬─────────────────────────────┘          │
+    │                   │                                         │
+    │  ┌────────────────▼──────────────────────────┐             │
+    │  │  LR-GEN3-NPU (5nm Neural Processor)       │             │
+    │  │  • 256 Processing Cores                   │             │
+    │  │  • 1.5 TFLOPS FP32                       │             │
+    │  │  • 6.0 TOPS INT8                         │             │
+    │  │  • Direct HBM3 attach                    │             │
+    │  └────────────────┬──────────────────────────┘             │
+    │                   │                                         │
+    │  ┌────────────────▼──────────────────────────┐             │
+    │  │  Memory Subsystem (192GB HBM3)           │             │
+    │  │  • 12x 16GB Stacks                       │             │
+    │  │  • 256 GB/s Bandwidth                    │             │
+    │  │  • Source-sync timing                    │             │
+    │  └───────────────────────────────────────────┘             │
+    │                                                             │
+    │  ┌──────────────────────────────────────────┐              │
+    │  │  Thermal Management & Monitoring         │              │
+    │  │  • 2x 40mm Axial Fans                    │              │
+    │  │  • 5x Temperature Sensors                │              │
+    │  │  • PWM Fan Control                       │              │
+    │  │  • Status Indicators (LED)               │              │
+    │  └──────────────────────────────────────────┘              │
+    │                                                             │
+    └─────────────────────────────────────────────────────────────┘
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 3
+    </div>
+</div>
+
+<!-- PAGE 4: BOARD SPECIFICATIONS -->
+<div class="page">
+    <h1>2. Board Specifications</h1>
+
+    <h2>2.1 Physical Dimensions & Form Factor</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Specification</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td><strong>PCB Length</strong></td>
+            <td>267 mm</td>
+            <td>Full-height form factor</td>
+        </tr>
+        <tr>
+            <td><strong>PCB Width</strong></td>
+            <td>111 mm</td>
+            <td>Dual-slot mounting</td>
+        </tr>
+        <tr>
+            <td><strong>PCB Thickness</strong></td>
+            <td>2.4 mm</td>
+            <td>FR-4 substrate (Tg ≥ 170°C)</td>
+        </tr>
+        <tr>
+            <td><strong>Form Factor</strong></td>
+            <td>PCI Express x16 (FH/FH)</td>
+            <td>Mechanical: Gen3/Gen4 compatible</td>
+        </tr>
+        <tr>
+            <td><strong>PCB Layers</strong></td>
+            <td>10-layer stackup</td>
+            <td>Controlled impedance (±10%)</td>
+        </tr>
+        <tr>
+            <td><strong>Total Height (with cooler)</strong></td>
+            <td>88 mm</td>
+            <td>Includes dual-fan shroud</td>
+        </tr>
+    </table>
+
+    <h2>2.2 PCB Layer Stackup</h2>
+    <table>
+        <tr>
+            <th>Layer #</th>
+            <th>Type</th>
+            <th>Thickness</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Signal/Ground</td>
+            <td>0.5 oz</td>
+            <td>PCIe escape routing, Vcore distribution</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Plane (VDD Core)</td>
+            <td>2.0 oz</td>
+            <td>Solid power plane for core voltage</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Signal</td>
+            <td>0.5 oz</td>
+            <td>Differential routing (PCIe), impedance controlled</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Plane (GND)</td>
+            <td>2.0 oz</td>
+            <td>Ground return plane (reference)</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Signal</td>
+            <td>1.0 oz</td>
+            <td>Power delivery, memory signals</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Plane (VDD 1.2V)</td>
+            <td>1.0 oz</td>
+            <td>Memory and auxiliary power</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Signal</td>
+            <td>0.5 oz</td>
+            <td>HBM3 memory routing, debug, I2C</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Plane (GND)</td>
+            <td>2.0 oz</td>
+            <td>Ground return (power delivery)</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Signal</td>
+            <td>0.5 oz</td>
+            <td>Fan control, LED, sensor signals</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Signal/GND</td>
+            <td>0.5 oz</td>
+            <td>Component bottom routing</td>
+        </tr>
+    </table>
+
+    <h2>2.3 Environmental & Compliance</h2>
+    <div class="spec-box">
+        <strong>Operating Conditions:</strong><br>
+        Temperature: 0°C to +55°C (ambient)<br>
+        Humidity: 10% to 90% (non-condensing)<br>
+        Altitude: 0 to 3,000m<br><br>
+
+        <strong>Storage Conditions:</strong><br>
+        Temperature: -40°C to +85°C<br>
+        Humidity: 5% to 95% (non-condensing)<br><br>
+
+        <strong>Compliance:</strong><br>
+        ✓ RoHS 3 (Restriction of Hazardous Substances)<br>
+        ✓ WEEE (Waste Electrical & Electronic Equipment)<br>
+        ✓ FCC Part 15 Class B (Electromagnetic Compatibility)<br>
+        ✓ CE EN 55032 (EMC Directive)<br>
+        ✓ UL 60950-1 / EN 60950-1 (Safety)<br>
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 4
+    </div>
+</div>
+
+<!-- PAGE 5: POWER DELIVERY -->
+<div class="page">
+    <h1>3. Power Delivery System</h1>
+
+    <h2>3.1 Power Input & Distribution</h2>
+    <table>
+        <tr>
+            <th>Source</th>
+            <th>Voltage</th>
+            <th>Max Current</th>
+            <th>Power</th>
+            <th>Connector</th>
+        </tr>
+        <tr>
+            <td>PCIe x16 Slot</td>
+            <td>12V / 5V / 3.3V</td>
+            <td>12.5A / 3A / 3A</td>
+            <td>75W</td>
+            <td>Edge connector</td>
+        </tr>
+        <tr>
+            <td>8-pin PEX (Primary)</td>
+            <td>12V / 5V</td>
+            <td>40A / 20A</td>
+            <td>225W</td>
+            <td>Molex 5559</td>
+        </tr>
+        <tr>
+            <td>6-pin PEX (Optional)</td>
+            <td>12V / 5V</td>
+            <td>20A / 10A</td>
+            <td>120W</td>
+            <td>Molex 5559</td>
+        </tr>
+        <tr>
+            <td colspan="4"><strong>Total Available: 420W (all sources) | Typical: 225W</strong></td>
+        </tr>
+    </table>
+
+    <h2>3.2 Power Delivery Architecture</h2>
+    <div class="spec-box">
+        <strong>Primary PDM Specifications:</strong><br><br>
+        <strong>Controller:</strong> Monolithic Power Systems MP5949<br>
+        • 12-phase independent PWM control<br>
+        • 300 kHz switching frequency<br>
+        • Integrated current sensing (12-bit ADC)<br>
+        • PMBus I2C interface for telemetry<br><br>
+
+        <strong>Power Stages (per phase):</strong><br>
+        • High-side FET: Texas Instruments CSD95481RWJ<br>
+        &nbsp;&nbsp;&nbsp;- Vds: 40V rated | Ids: 115A @ 25°C | Rds(on): 0.82mΩ<br>
+        • Low-side FET: Identical to high-side<br>
+        • Phase Inductor: Shielded, 0.47µH, Isat: 180A<br>
+        • Phase Capacitance: Ceramic array (15-20µF per phase)<br><br>
+
+        <strong>Output Specifications:</strong><br>
+        • Core Rail (Vcore): 0.9V nominal ±3%<br>
+        • Memory Rail (Vmem): 1.2V nominal ±3%<br>
+        • Maximum Phase Current: 70A per phase<br>
+        • Total Core Current: 210A (12 phases)<br>
+        • Total Memory Current: 75A<br>
+        • Transient Response: <50mV droop on 50A step<br>
+        • Efficiency: >92% at rated load<br>
+    </div>
+
+    <h2>3.3 Voltage Rails & Regulation</h2>
+    <table>
+        <tr>
+            <th>Rail</th>
+            <th>Voltage</th>
+            <th>Max Current</th>
+            <th>Protection</th>
+            <th>Usage</th>
+        </tr>
+        <tr>
+            <td>Vcore</td>
+            <td>0.9V ±3%</td>
+            <td>210A</td>
+            <td>OCP, OVP, Soft-start</td>
+            <td>GPU processor core</td>
+        </tr>
+        <tr>
+            <td>Vmem</td>
+            <td>1.2V ±3%</td>
+            <td>75A</td>
+            <td>Current limit, Soft-start</td>
+            <td>HBM3 memory stacks</td>
+        </tr>
+        <tr>
+            <td>V5</td>
+            <td>5.0V ±5%</td>
+            <td>20A</td>
+            <td>PTC Fuse 15A</td>
+            <td>Fan PWM, sensors, aux</td>
+        </tr>
+        <tr>
+            <td>V3.3</td>
+            <td>3.3V ±5%</td>
+            <td>2.5A</td>
+            <td>LDO regulator, PTC 4A</td>
+            <td>I/O logic, oscillator</td>
+        </tr>
+        <tr>
+            <td>V1.8</td>
+            <td>1.8V ±5%</td>
+            <td>1.5A</td>
+            <td>LDO regulator, PTC 2A</td>
+            <td>JTAG, I2C, dig. logic</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 5
+    </div>
+</div>
+
+<!-- PAGE 6: PCIe INTERFACE -->
+<div class="page">
+    <h1>4. PCIe Interface & Input Switching</h1>
+
+    <h2>4.1 PCIe x16 Connector Specifications</h2>
+    <div class="spec-box">
+        <strong>Mechanical Specification:</strong><br>
+        • Standard PCI Express 4.0 x16 mechanical form factor<br>
+        • Female socket receptacle on motherboard<br>
+        • 164-pin edge connector<br>
+        • Gold-plated contacts (>500 insertion cycles)<br>
+        • Dual-key for correct orientation (primary slot)<br><br>
+
+        <strong>Electrical Specification:</strong><br>
+        • PCIe Gen4 electrical compatibility<br>
+        • 16-lane configuration (x16 mode)<br>
+        • Link speed: 16 GT/s per lane<br>
+        • Power delivery via pins 33-34 (+12V), pin 66 (+3.3V)<br>
+        • Maximum power from slot: 75W<br>
+        • Multi-point ground reference (pins 1-12, 35-45, 74-75)<br>
+    </div>
+
+    <h2>4.2 PCIe Power Distribution</h2>
+    <div class="diagram">
+    PCIe Slot Power:
+    ├─ +12V Rail (Pins 33, 34): 12.5A max @ 12V
+    │  └─ Decoupling: 47µF x2 (20V ceramic)
+    │     Power target: 12.5A × 12V = 150W
+    │     Actual limit: 75W (shared with 3.3V)
+    │
+    ├─ +5V Rail (PCIe): 3A max
+    │  └─ Merged with 5V PEX input via diode-OR
+    │
+    ├─ +3.3V Rail (Pin 66): 3A max @ 3.3V
+    │  └─ Power: 10mW (auxiliary only)
+    │
+    └─ GND (Multi-pin): All return currents
+       └─ Traces to primary power planes
+    </div>
+
+    <h2>4.3 Input Protection & Switching</h2>
+    <table>
+        <tr>
+            <th>Circuit Element</th>
+            <th>Function</th>
+            <th>Specification</th>
+        </tr>
+        <tr>
+            <td>OR-ing Diodes</td>
+            <td>Merge PCIe & PEX power</td>
+            <td>Schottky 40A, Vfwd: 0.35V max</td>
+        </tr>
+        <tr>
+            <td>PTC Fuses</td>
+            <td>Overcurrent protection</td>
+            <td>12V: 15A | 5V: 5A | 3.3V: 4A</td>
+        </tr>
+        <tr>
+            <td>Soft-Start Resistor</td>
+            <td>Limit inrush current</td>
+            <td>100Ω series (500ms ramp)</td>
+        </tr>
+        <tr>
+            <td>Hold-Up Capacitors</td>
+            <td>Input surge absorption</td>
+            <td>1000µF total (12V rail)</td>
+        </tr>
+        <tr>
+            <td>Reverse Polarity</td>
+            <td>Connector misalignment prot.</td>
+            <td>Keyed connectors, fuses as backup</td>
+        </tr>
+    </table>
+
+    <h2>4.4 Signal Integrity Requirements</h2>
+    <div class="spec-box">
+        <strong>PCIe Data Lines:</strong><br>
+        • Impedance: 100Ω ±10% (differential pairs)<br>
+        • Length matching: ±20 mils (within lane group)<br>
+        • Via count: <4 per signal<br>
+        • Guard traces: Between signal groups<br><br>
+
+        <strong>PCIe Clocking:</strong><br>
+        • Reference clock: 100 MHz ±300 ppm<br>
+        • Jitter budget: <20ps RMS<br>
+        • Phase noise: <-60dBc<br>
+        • Slew rate: 200-600 mV/ns<br><br>
+
+        <strong>AC Coupling:</strong><br>
+        • Coupling capacitors: 100nF per TX pair<br>
+        • Termination: 100Ω on RX side (on-die)<br>
+        • DC bias: Floating (AC-coupled)
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 6
+    </div>
+</div>
+
+<!-- PAGE 7: MEMORY SUBSYSTEM -->
+<div class="page">
+    <h1>5. Memory Subsystem</h1>
+
+    <h2>5.1 HBM3 Memory Configuration</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Specification</th>
+        </tr>
+        <tr>
+            <td><strong>Memory Type</strong></td>
+            <td>HBM3 (High Bandwidth Memory 3)</td>
+        </tr>
+        <tr>
+            <td><strong>Part Number</strong></td>
+            <td>SK Hynix H58M16ABHX (16Gb per stack)</td>
+        </tr>
+        <tr>
+            <td><strong>Quantity</strong></td>
+            <td>12 stacks (6 per side)</td>
+        </tr>
+        <tr>
+            <td><strong>Total Capacity</strong></td>
+            <td>192 GB (12 × 16GB)</td>
+        </tr>
+        <tr>
+            <td><strong>Stack Dimensions</strong></td>
+            <td>10.5mm × 13mm × 11.5mm (H)</td>
+        </tr>
+        <tr>
+            <td><strong>Dies per Stack</strong></td>
+            <td>8 dies (256Mb each) in series</td>
+        </tr>
+        <tr>
+            <td><strong>Micro-bump Pitch</strong></td>
+            <td>40µm (pitch)</td>
+        </tr>
+        <tr>
+            <td><strong>Total Bumps/Stack</strong></td>
+            <td>1,024 (data + control + power/GND)</td>
+        </tr>
+    </table>
+
+    <h2>5.2 Memory Interface Specifications</h2>
+    <div class="spec-box">
+        <strong>Data Interface:</strong><br>
+        • Data width per stack: 128 bits<br>
+        • Total data width: 1,024 bits (12 × 128)<br>
+        • Strobe lines: 16 per interface<br>
+        • Effective bandwidth: 256 GB/s @ 2.4 GHz DDR<br><br>
+
+        <strong>Timing Specifications:</strong><br>
+        • Clock frequency: 2.4 GHz DDR (1.2 GHz instruction rate)<br>
+        • CAS latency: 12 cycles<br>
+        • Refresh interval: 64ms standard<br>
+        • Bank refresh time: <50ns<br>
+        • Burst length: 4/8/16 (programmable)<br><br>
+
+        <strong>Power Specifications:</strong><br>
+        • Supply voltage: 1.2V ±3%<br>
+        • I/O voltage: 1.2V ±3%<br>
+        • Typical power (all stacks): 15W active, 5W idle<br>
+        • ECC: SECDED (single-error-correction)<br>
+    </div>
+
+    <h2>5.3 Memory Layout & Placement</h2>
+    <div class="diagram">
+    Memory Stack Placement (Top View):
+
+    PCIe Connector Edge (Front)
+
+    ┌─────────────────────────────────────────────────┐
+    │                                                 │
+    │  Stack0   Stack1   Stack2   Stack3   Stack4   Stack5
+    │   (S0)     (S1)     (S2)     (S3)     (S4)     (S5)
+    │   Left Side (6 stacks)                         │
+    │                                                 │
+    │            LR-GEN3-NPU Die                      │
+    │         (300mm² @ center)                       │
+    │          Heatspreader                           │
+    │         (50mm × 50mm)                           │
+    │                                                 │
+    │  Stack6   Stack7   Stack8   Stack9  Stack10  Stack11
+    │   (S6)     (S7)     (S8)     (S9)    (S10)    (S11)
+    │   Right Side (6 stacks)                        │
+    │                                                 │
+    └─────────────────────────────────────────────────┘
+
+    Fan Shroud (Rear) ►
+    </div>
+
+    <h2>5.4 Memory Decoupling & Power Distribution</h2>
+    <table>
+        <tr>
+            <th>Capacitor Type</th>
+            <th>Value</th>
+            <th>Per Stack</th>
+            <th>Total</th>
+            <th>Placement</th>
+        </tr>
+        <tr>
+            <td>Ceramic (X7R)</td>
+            <td>10µF / 6.3V</td>
+            <td>2</td>
+            <td>24</td>
+            <td>Within 3mm of bumps</td>
+        </tr>
+        <tr>
+            <td>Ceramic (X7R)</td>
+            <td>2.2µF / 6.3V</td>
+            <td>2</td>
+            <td>24</td>
+            <td>Adjacent to capacitors</td>
+        </tr>
+        <tr>
+            <td>Ceramic (X7R)</td>
+            <td>0.47µF / 6.3V</td>
+            <td>4</td>
+            <td>48</td>
+            <td>Via stitched to plane</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 7
+    </div>
+</div>
+
+<!-- PAGE 8: THERMAL MANAGEMENT -->
+<div class="page">
+    <h1>6. Thermal Management</h1>
+
+    <h2>6.1 Thermal Design Specifications</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Specification</th>
+            <th>Condition</th>
+        </tr>
+        <tr>
+            <td><strong>Die Temperature (Max)</strong></td>
+            <td>100°C</td>
+            <td>Absolute maximum rating</td>
+        </tr>
+        <tr>
+            <td><strong>Throttle Threshold (Soft)</strong></td>
+            <td>85°C</td>
+            <td>Clock reduction begins</td>
+        </tr>
+        <tr>
+            <td><strong>Throttle Threshold (Hard)</strong></td>
+            <td>95°C</td>
+            <td>Full shutdown if exceeded</td>
+        </tr>
+        <tr>
+            <td><strong>Typical Operating Temp</strong></td>
+            <td>65-75°C</td>
+            <td>@ 25°C ambient, full load</td>
+        </tr>
+        <tr>
+            <td><strong>Thermal Resistance (Die→Case)</strong></td>
+            <td>0.15°C/W</td>
+            <td>Direct TIM interface</td>
+        </tr>
+        <tr>
+            <td><strong>Thermal Resistance (Case→Air)</strong></td>
+            <td>0.25°C/W</td>
+            <td>With heatsink + fans</td>
+        </tr>
+    </table>
+
+    <h2>6.2 Heatspreader & Thermal Interface</h2>
+    <div class="spec-box">
+        <strong>Heatspreader Material & Dimensions:</strong><br>
+        • Material: Aluminum 6061-T6<br>
+        • Dimensions: 50mm × 50mm × 3mm thickness<br>
+        • Surface finish: Anodized (Type II)<br>
+        • Thermal conductivity: 160 W/mK<br>
+        • Die coverage: >95% of active area<br><br>
+
+        <strong>Thermal Interface Material (TIM):</strong><br>
+        • Type: Arctic MX-4 (or equivalent)<br>
+        • Application thickness: 0.5mm<br>
+        • Thermal conductivity: 5 W/mK<br>
+        • Operating range: -40 to +80°C<br>
+        • Application: Thin, even layer (no voids)<br>
+        • Curing: 5 thermal cycles @ full load recommended<br>
+    </div>
+
+    <h2>6.3 Cooling System</h2>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>Specification</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td><strong>Fan Type</strong></td>
+            <td>2x 40mm DC Axial</td>
+            <td>Delta or Noctua equivalent</td>
+        </tr>
+        <tr>
+            <td><strong>Voltage</strong></td>
+            <td>5V or 12V (configurable)</td>
+            <td>PWM control @ 25 kHz</td>
+        </tr>
+        <tr>
+            <td><strong>CFM (50% speed)</strong></td>
+            <td>~20 CFM per fan</td>
+            <td>40 CFM total airflow</td>
+        </tr>
+        <tr>
+            <td><strong>RPM (nominal)</strong></td>
+            <td>2500 RPM</td>
+            <td>@ 50% PWM duty cycle</td>
+        </tr>
+        <tr>
+            <td><strong>Noise Level</strong></td>
+            <td>&lt;35 dB(A)</td>
+            <td>@ nominal speed</td>
+        </tr>
+        <tr>
+            <td><strong>Bearing Type</strong></td>
+            <td>Fluid Dynamic Bearing (FDB)</td>
+            <td>Extended lifespan</td>
+        </tr>
+        <tr>
+            <td><strong>MTBF</strong></td>
+            <td>&gt;40,000 hours</td>
+            <td>@ rated conditions</td>
+        </tr>
+    </table>
+
+    <h2>6.4 Temperature Monitoring</h2>
+    <div class="spec-box">
+        <strong>Sensor Locations (5 total):</strong><br><br>
+        <strong>1. Die Temperature (Internal):</strong><br>
+        &nbsp;&nbsp;&nbsp;• Integrated sensor in LR-GEN3-NPU<br>
+        &nbsp;&nbsp;&nbsp;• Resolution: 0.5°C<br>
+        &nbsp;&nbsp;&nbsp;• Accuracy: ±2°C<br>
+        &nbsp;&nbsp;&nbsp;• Primary control point<br><br>
+
+        <strong>2-4. Ambient Temperature (Thermistors):</strong><br>
+        &nbsp;&nbsp;&nbsp;• Inlet air (near GPU socket)<br>
+        &nbsp;&nbsp;&nbsp;• Exhaust air (downstream of fans)<br>
+        &nbsp;&nbsp;&nbsp;• Left ambient (reference)<br>
+        &nbsp;&nbsp;&nbsp;• Type: NTC 10kΩ @ 25°C<br><br>
+
+        <strong>5. MOSFET Temperature:</strong><br>
+        &nbsp;&nbsp;&nbsp;• Thermistor on power stage heatsink<br>
+        &nbsp;&nbsp;&nbsp;• Monitors peak phase temperature<br><br>
+
+        <strong>Fan Control Logic:</strong><br>
+        &nbsp;&nbsp;&nbsp;• Threshold: 25°C → 100% duty cycle (linear)<br>
+        &nbsp;&nbsp;&nbsp;• Hysteresis: 5°C dead-band to prevent chatter<br>
+        &nbsp;&nbsp;&nbsp;• Failsafe: 80% @ sensor fault<br>
+        &nbsp;&nbsp;&nbsp;• Update rate: Every 500ms<br>
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 8
+    </div>
+</div>
+
+<!-- PAGE 9: POWER SEQUENCING -->
+<div class="page">
+    <h1>7. Power Sequencing & Control</h1>
+
+    <h2>7.1 Power-On Sequence (POR)</h2>
+    <div class="diagram">
+    Time (ms)  Event                          Status
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    0          Power applied (PCIe insertion)
+    │          ├─ All rails powered (raw 12V, 5V)
+    │          └─ Decoupling caps charging
+    │
+    10         Input voltage stable
+    │          ├─ Hold-up caps charged
+    │          └─ Reset circuit monitoring
+    │
+    15         3.3V Auxiliary LDO enabled
+    │          ├─ Oscillator powered
+    │          └─ Monitor ICs initialized
+    │
+    20         1.8V JTAG LDO enabled
+    │          ├─ Debug interface ready
+    │          └─ I2C bus powered
+    │
+    30         PDM Clocks enabled
+    │          ├─ Switching frequency stabilized
+    │          └─ Phase drivers ready
+    │
+    35         Core Voltage Ramp Starts (0.65V → 0.9V)
+    │          ├─ Ramp rate: 10 mV/ms
+    │          ├─ Soft-start RC: 100ms
+    │          └─ Time to full: 45ms
+    │
+    50         Memory Voltage Ramp Starts (1.0V → 1.2V)
+    │          ├─ Concurrent with core ramp
+    │          ├─ Ramp rate: 20 mV/ms
+    │          └─ Time to full: 10ms
+    │
+    85         Core voltage stable at 0.9V
+    │          ├─ JTAG reset released
+    │          └─ GPU scans JTAG boundary
+    │
+    90         Memory voltage stable at 1.2V
+    │          ├─ Memory PHY initialization
+    │          └─ JEDEC training begins
+    │
+    100        PLL lock (2.4 GHz clock)
+    │          ├─ Core clock active
+    │          └─ Memory clock active
+    │
+    120        GPU reset released
+    │          ├─ Instruction fetch begins
+    │          └─ Boot ROM execution
+    │
+    150        System ready for operation
+               All rails stable, fans running, ready for PCIe link training
+    </div>
+
+    <h2>7.2 Voltage Ramp Control</h2>
+    <table>
+        <tr>
+            <th>Rail</th>
+            <th>Start Voltage</th>
+            <th>End Voltage</th>
+            <th>Ramp Rate</th>
+            <th>Total Time</th>
+            <th>Method</th>
+        </tr>
+        <tr>
+            <td>Vcore (0.9V)</td>
+            <td>0.65V</td>
+            <td>0.9V</td>
+            <td>10 mV/ms</td>
+            <td>45ms</td>
+            <td>Soft-start resistor (MP5949)</td>
+        </tr>
+        <tr>
+            <td>Vmem (1.2V)</td>
+            <td>1.0V</td>
+            <td>1.2V</td>
+            <td>20 mV/ms</td>
+            <td>10ms</td>
+            <td>Integrated ramp (LDO)</td>
+        </tr>
+        <tr>
+            <td>V5</td>
+            <td>0V</td>
+            <td>5.0V</td>
+            <td>100 mV/ms</td>
+            <td>50ms</td>
+            <td>PTC fuse soft-start</td>
+        </tr>
+        <tr>
+            <td>V3.3</td>
+            <td>0V</td>
+            <td>3.3V</td>
+            <td>50 mV/ms</td>
+            <td>66ms</td>
+            <td>LDO natural response</td>
+        </tr>
+    </table>
+
+    <h2>7.3 Fault Detection & Shutdown</h2>
+    <div class="spec-box">
+        <strong>Monitored Faults:</strong><br>
+        • Overvoltage (OVP): >1.0V on Vcore → Shut down PDM<br>
+        • Overcurrent (OCP): >220A peak → Current limit engaged<br>
+        • Overtemperature: >95°C junction → GPU reset + throttle<br>
+        • Undervoltage (UVLO): <0.8V on Vcore → Emergency shutdown<br>
+        • Power loss: All supplies <5V → Graceful shutdown<br><br>
+
+        <strong>Graceful Shutdown Sequence:</strong><br>
+        1. Assert GPU reset immediately<br>
+        2. Disable memory refresh<br>
+        3. Stop clock generation<br>
+        4. Release all enable signals<br>
+        5. Capacitors discharge naturally<br>
+        6. Total time: <500ms to safe state<br>
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 9
+    </div>
+</div>
+
+<!-- PAGE 10: CLOCK DISTRIBUTION -->
+<div class="page">
+    <h1>8. Clock Distribution</h1>
+
+    <h2>8.1 Reference Oscillator</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Specification</th>
+        </tr>
+        <tr>
+            <td><strong>Device Type</strong></td>
+            <td>TCXO (Temperature Compensated Crystal Oscillator)</td>
+        </tr>
+        <tr>
+            <td><strong>Part Number</strong></td>
+            <td>NDK SG-531S or equivalent</td>
+        </tr>
+        <tr>
+            <td><strong>Frequency</strong></td>
+            <td>27.0 MHz ±50 ppm</td>
+        </tr>
+        <tr>
+            <td><strong>Stability</strong></td>
+            <td>±50 ppm over operating range</td>
+        </tr>
+        <tr>
+            <td><strong>Temperature Coefficient</strong></td>
+            <td>±5 ppm/°C (TCXO compensated)</td>
+        </tr>
+        <tr>
+            <td><strong>Jitter (RMS)</strong></td>
+            <td>&lt;1 ps</td>
+        </tr>
+        <tr>
+            <td><strong>Supply Voltage</strong></td>
+            <td>3.3V ±5%</td>
+        </tr>
+        <tr>
+            <td><strong>Supply Current</strong></td>
+            <td>&lt;100 mA (typically 50 mA)</td>
+        </tr>
+        <tr>
+            <td><strong>Output Format</strong></td>
+            <td>CMOS/TTL, rail-to-rail</td>
+        </tr>
+        <tr>
+            <td><strong>Package</strong></td>
+            <td>7×5mm ceramic (AT-cut)</td>
+        </tr>
+        <tr>
+            <td><strong>Startup Time</strong></td>
+            <td>&lt;100 ms to stability</td>
+        </tr>
+    </table>
+
+    <h2>8.2 On-Chip PLL & Clock Multiplier</h2>
+    <div class="spec-box">
+        <strong>PLL Architecture (Integrated in LR-GEN3-NPU):</strong><br><br>
+        <strong>Input Stage:</strong><br>
+        • Reference frequency: 27 MHz ±50 ppm<br>
+        • Phase detector: ±60 dBc phase noise<br>
+        • Reference divider: ÷1 (no reduction)<br><br>
+
+        <strong>Multiplier Stage:</strong><br>
+        • Multiplication factor: x88.9<br>
+        • Output frequency: 2.4 GHz (27 × 88.9 ÷ 1)<br>
+        • VCO range: 2.2 - 2.6 GHz<br>
+        • Feedback divider: ÷32 (for lock range)<br><br>
+
+        <strong>Output Characteristics:</strong><br>
+        • Frequency accuracy: ±0.1%<br>
+        • Jitter (period): <2 ps RMS<br>
+        • Phase noise @ 1MHz offset: <-100 dBc/Hz<br>
+        • Duty cycle: 50% ±5%<br>
+        • Lock time: <10 microseconds<br><br>
+
+        <strong>Programmable Features:</strong><br>
+        • Spread spectrum: Disabled (for simplicity)<br>
+        • Loop bandwidth: Fixed (optimized for stability)<br>
+        • Bypass mode: Emergency fallback (if needed)<br>
+    </div>
+
+    <h2>8.3 Clock Distribution Network</h2>
+    <div class="diagram">
+    Clock Source Tree:
+
+    27 MHz TCXO
+    │
+    ├─ 3.3V Supply & Decoupling
+    │  └─ 10µF + 0.1µF (within 5mm)
+    │
+    └─► On-Chip PLL (in LR-GEN3-NPU)
+        │
+        ├─► Core Clock Domain (2.4 GHz)
+        │   ├─ Register file clock
+        │   ├─ ALU / Execution clock
+        │   ├─ Cache clock
+        │   ├─ Memory controller clock
+        │   └─ Skew control: <50 ps max
+        │
+        └─► Memory Clock Domain (2.4 GHz DDR)
+            │
+            ├─ CLK (positive, differential)
+            ├─ CLK# (negative, differential)
+            ├─ CLKQ (quadrature, differential)
+            └─ CLKQ# (quad negative)
+
+            Routed to all 12 HBM3 stacks
+            ├─ Slew rate: <100 ps rise/fall
+            ├─ Jitter: <3 ps period
+            └─ Skew between stacks: <100 ps max
+    </div>
+
+    <h2>8.4 Clock Routing Requirements</h2>
+    <table>
+        <tr>
+            <th>Signal</th>
+            <th>Frequency</th>
+            <th>Impedance</th>
+            <th>Routing Rule</th>
+            <th>Via Limit</th>
+        </tr>
+        <tr>
+            <td>27 MHz Ref</td>
+            <td>27 MHz</td>
+            <td>50Ω single-ended</td>
+            <td>Star routing</td>
+            <td>2 max</td>
+        </tr>
+        <tr>
+            <td>Core CLK</td>
+            <td>2.4 GHz</td>
+            <td>100Ω differential</td>
+            <td>Matched pair, length match ±10ps</td>
+            <td>4 max</td>
+        </tr>
+        <tr>
+            <td>Mem CLK</td>
+            <td>2.4 GHz DDR</td>
+            <td>100Ω differential</td>
+            <td>Length match: ±20 mils</td>
+            <td>2 max</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 10
+    </div>
+</div>
+
+<!-- PAGE 11: DEBUG & TEST -->
+<div class="page">
+    <h1>9. Debug Interface & Test</h1>
+
+    <h2>9.1 JTAG Test Access Port (TAP)</h2>
+    <div class="spec-box">
+        <strong>Connector Specification:</strong><br>
+        • Type: 14-pin dual-row .100" pitch header<br>
+        • Voltage: 1.8V LVCMOS signaling<br>
+        • Configuration: Standard IEEE 1149.1 TAP<br>
+        • Connector pattern: Dual-row receptacle<br><br>
+
+        <strong>Pin Assignment:</strong><br>
+        &nbsp;&nbsp;&nbsp;Pins 1-4, 6-7, 9-14: GND (multi-point return)<br>
+        &nbsp;&nbsp;&nbsp;Pin 5: VCC (1.8V, max 100 mA)<br>
+        &nbsp;&nbsp;&nbsp;Pin 8: TDO (Test Data Out)<br>
+        &nbsp;&nbsp;&nbsp;Pin 10: TCK (Test Clock, max 25 MHz)<br>
+        &nbsp;&nbsp;&nbsp;Pin 11: TMS (Test Mode Select)<br>
+        &nbsp;&nbsp;&nbsp;Pin 12: TDI (Test Data In)<br>
+        &nbsp;&nbsp;&nbsp;Pin 13: TRST# (TAP Reset, optional)<br>
+        &nbsp;&nbsp;&nbsp;Pin 14: SRST# (System Reset, optional)<br><br>
+
+        <strong>Signal Characteristics:</strong><br>
+        • Rise/fall time: <10 ns<br>
+        • Setup time (before TCK): >10 ns<br>
+        • Hold time (after TCK): >5 ns<br>
+        • Drive capability: 4-8 mA per pin<br>
+        • Series resistor (protection): 33Ω recommended<br>
+    </div>
+
+    <h2>9.2 Boundary Scan & Testing</h2>
+    <table>
+        <tr>
+            <th>Test Feature</th>
+            <th>Cells</th>
+            <th>Scan Chain</th>
+            <th>Capability</th>
+        </tr>
+        <tr>
+            <td>Boundary Scan</td>
+            <td>3,136 cells</td>
+            <td>Full ring</td>
+            <td>I/O observation & forcing</td>
+        </tr>
+        <tr>
+            <td>Data Register</td>
+            <td>32+ bits</td>
+            <td>Captured</td>
+            <td>GPIO state sampling</td>
+        </tr>
+        <tr>
+            <td>Instruction Register</td>
+            <td>8 bits</td>
+            <td>IR chain</td>
+            <td>8 instruction modes</td>
+        </tr>
+        <tr>
+            <td>ID Code Register</td>
+            <td>32 bits</td>
+            <td>Stored</td>
+            <td>Die identification</td>
+        </tr>
+    </table>
+
+    <h2>9.3 Test Instruction Set</h2>
+    <table>
+        <tr>
+            <th>Instruction</th>
+            <th>Code (Hex)</th>
+            <th>Function</th>
+            <th>Data Length</th>
+        </tr>
+        <tr>
+            <td>IDCODE</td>
+            <td>0x01</td>
+            <td>Read die ID (revision, mfg)</td>
+            <td>32 bits</td>
+        </tr>
+        <tr>
+            <td>SAMPLE/PRELOAD</td>
+            <td>0x03</td>
+            <td>Observe I/O states</td>
+            <td>3,136 bits</td>
+        </tr>
+        <tr>
+            <td>EXTEST</td>
+            <td>0x04</td>
+            <td>Drive I/O pins (external)</td>
+            <td>3,136 bits</td>
+        </tr>
+        <tr>
+            <td>INTEST</td>
+            <td>0x05</td>
+            <td>Internal gate delay test</td>
+            <td>3,136 bits</td>
+        </tr>
+        <tr>
+            <td>BYPASS</td>
+            <td>0xFF</td>
+            <td>Minimal chain (1-bit bypass)</td>
+            <td>1 bit</td>
+        </tr>
+    </table>
+
+    <h2>9.4 Test Coverage</h2>
+    <div class="spec-box">
+        <strong>In-Circuit Test (ICT) Points:</strong><br>
+        • Power rail monitoring: 50+ test pads<br>
+        • Signal validation: 24 observation points<br>
+        • JTAG access: Full boundary scan<br>
+        • Thermal sensor reading: I2C interrogation<br><br>
+
+        <strong>Functional Test Suite:</strong><br>
+        ✓ PCIe link training (Gen4 x16)<br>
+        ✓ Memory pattern test (march-YFFF algorithm)<br>
+        ✓ Voltage regulator transient response<br>
+        ✓ Fan PWM duty-cycle verification<br>
+        ✓ Temperature sensor accuracy (±2°C)<br>
+        ✓ Clock frequency verification<br>
+        ✓ Thermal cycling validation (3 cycles)<br>
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 11
+    </div>
+</div>
+
+<!-- PAGE 12: CONNECTORS & MECHANICAL -->
+<div class="page">
+    <h1>10. Electrical & Mechanical Details</h1>
+
+    <h2>10.1 Connector Pinouts</h2>
+
+    <h3>PCIe x16 Edge Connector</h3>
+    <table>
+        <tr>
+            <th>Pin Range</th>
+            <th>Signal</th>
+            <th>Count</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td>1-12</td>
+            <td>GND</td>
+            <td>12</td>
+            <td>Ground reference</td>
+        </tr>
+        <tr>
+            <td>13-32</td>
+            <td>RX[0-19]</td>
+            <td>20</td>
+            <td>Receive data (10 pairs differential)</td>
+        </tr>
+        <tr>
+            <td>33-34</td>
+            <td>+12V</td>
+            <td>2</td>
+            <td>Power: 12.5A max (@12V @ 75W limit)</td>
+        </tr>
+        <tr>
+            <td>35-45</td>
+            <td>GND</td>
+            <td>11</td>
+            <td>Ground return</td>
+        </tr>
+        <tr>
+            <td>46-65</td>
+            <td>TX[0-19]</td>
+            <td>20</td>
+            <td>Transmit data (10 pairs differential)</td>
+        </tr>
+        <tr>
+            <td>66</td>
+            <td>+3.3V</td>
+            <td>1</td>
+            <td>Power: 3A max</td>
+        </tr>
+        <tr>
+            <td>67-73</td>
+            <td>RX[20-26]</td>
+            <td>7</td>
+            <td>Receive (lane 1-3 pairs)</td>
+        </tr>
+        <tr>
+            <td>74-75</td>
+            <td>CLK</td>
+            <td>2</td>
+            <td>Reference clock (differential)</td>
+        </tr>
+    </table>
+
+    <h3>8-pin PEX Auxiliary Power</h3>
+    <div class="connector-grid">
+        <div class="connector-box">
+            <h4>Pin Assignment</h4>
+            <table style="width: 100%; font-size: 0.9em;">
+                <tr><td>Pin 1:</td><td>+12V (Red)</td></tr>
+                <tr><td>Pin 2:</td><td>+12V (Red)</td></tr>
+                <tr><td>Pin 3:</td><td>+5V (Red/Yellow)</td></tr>
+                <tr><td>Pin 4:</td><td>+5V (Red/Yellow)</td></tr>
+                <tr><td>Pin 5:</td><td>GND (Black)</td></tr>
+                <tr><td>Pin 6:</td><td>GND (Black)</td></tr>
+                <tr><td>Pin 7:</td><td>GND (Black)</td></tr>
+                <tr><td>Pin 8:</td><td>GND (Black)</td></tr>
+            </table>
+        </div>
+        <div class="connector-box">
+            <h4>Electrical Ratings</h4>
+            <p style="margin: 5px 0;"><strong>12V Rail:</strong><br>
+            2 contacts @ 20A = 40A max</p>
+            <p style="margin: 5px 0;"><strong>5V Rail:</strong><br>
+            2 contacts @ 20A = 40A max</p>
+            <p style="margin: 5px 0;"><strong>GND Return:</strong><br>
+            4 contacts @ 20A = 80A capacity</p>
+            <p style="margin: 5px 0;"><strong>Contact Resistance:</strong><br>
+            <10mΩ per pin</p>
+        </div>
+    </div>
+
+    <h3>JTAG Debug Header (14-pin)</h3>
+    <table>
+        <tr>
+            <th>Pin</th>
+            <th>Signal</th>
+            <th>Type</th>
+            <th>Voltage</th>
+        </tr>
+        <tr>
+            <td>1-4, 6-7, 9-14</td>
+            <td>GND</td>
+            <td>Return</td>
+            <td>0V</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>VCC</td>
+            <td>Supply</td>
+            <td>1.8V ±5%</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>TDO</td>
+            <td>Output</td>
+            <td>1.8V LVCMOS</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>TCK</td>
+            <td>Input</td>
+            <td>1.8V LVCMOS</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>TMS</td>
+            <td>Input</td>
+            <td>1.8V LVCMOS</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>TDI</td>
+            <td>Input</td>
+            <td>1.8V LVCMOS</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>TRST#</td>
+            <td>Input (opt)</td>
+            <td>1.8V LVCMOS</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>SRST#</td>
+            <td>Input (opt)</td>
+            <td>1.8V LVCMOS</td>
+        </tr>
+    </table>
+
+    <h2>10.2 PCB Layout Rules</h2>
+    <div class="note">
+        <strong>Signal Integrity Rules:</strong><br>
+        • Trace width tolerance: ±10%<br>
+        • Trace-to-trace spacing: ±0.05mm<br>
+        • Via diameter: 0.3mm (±0.05mm)<br>
+        • BGA ball placement: ±0.05mm (Cpk >1.33)<br>
+        • PCB flatness: <0.5mm across full board<br>
+        • Solder mask alignment: ±0.05mm<br><br>
+
+        <strong>Via Stitching:</strong><br>
+        • Ground via pattern: 1 via per square inch<br>
+        • Power via density: 6 vias per 100 mils of trace<br>
+        • Escape via diameter: 0.3mm<br>
+        • Copper via fill: Not recommended (signal vias only)<br>
+    </div>
+
+    <h2>10.3 Bill of Materials (Partial)</h2>
+    <table>
+        <tr>
+            <th>Qty</th>
+            <th>Component</th>
+            <th>Part Number</th>
+            <th>Manufacturer</th>
+            <th>Package</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Main ASIC (LR-GEN3-NPU)</td>
+            <td>LR-GEN3-NPU-5NM</td>
+            <td>LightRail AI</td>
+            <td>BGA-3136</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>HBM3 Memory Stack</td>
+            <td>H58M16ABHX</td>
+            <td>SK Hynix</td>
+            <td>16Gb stack</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>PWM Controller</td>
+            <td>MP5949</td>
+            <td>MPS</td>
+            <td>QFN-48</td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>Phase FET (high/low)</td>
+            <td>CSD95481RWJ</td>
+            <td>Texas Instruments</td>
+            <td>PK 8x8</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Voltage Monitor IC</td>
+            <td>INA3221</td>
+            <td>Texas Instruments</td>
+            <td>TSSOP-20</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Thermal Controller</td>
+            <td>NCT6798D</td>
+            <td>Nuvoton</td>
+            <td>QFN-48</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>40mm DC Fan</td>
+            <td>PFB0412SHN</td>
+            <td>Delta / Noctua</td>
+            <td>40x40x20</td>
+        </tr>
+        <tr>
+            <td>~600</td>
+            <td>Capacitors</td>
+            <td>Various (MLCCs)</td>
+            <td>Various</td>
+            <td>0603-1206</td>
+        </tr>
+        <tr>
+            <td>~250</td>
+            <td>Resistors</td>
+            <td>Various</td>
+            <td>Various</td>
+            <td>0603-1206</td>
+        </tr>
+        <tr>
+            <td>~50</td>
+            <td>Inductors</td>
+            <td>Various (shielded)</td>
+            <td>Various</td>
+            <td>1210-1812</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 12
+    </div>
+</div>
+
+<!-- PAGE 13: MANUFACTURING & COMPLIANCE -->
+<div class="page">
+    <h1>Manufacturing & Quality</h1>
+
+    <h2>Manufacturing Process</h2>
+    <div class="spec-box">
+        <strong>Assembly Sequence:</strong><br>
+        1. Solder paste application (stencil print, 100-150µm)<br>
+        2. Component placement (pick & place automated for passives, manual for BGA)<br>
+        3. Reflow soldering (Pb-free profile, peak 250-260°C)<br>
+        4. X-ray inspection (solder voids <10% acceptance)<br>
+        5. Thermal cycling (3 cycles: -20 to +80°C)<br>
+        6. Wash & clean (flux removal)<br>
+        7. AOI (automated optical inspection)<br>
+        8. Functional test & programming<br>
+        9. Thermal calibration & burn-in<br>
+        10. Final QA & packaging<br>
+    </div>
+
+    <h2>Testing & Validation</h2>
+    <table>
+        <tr>
+            <th>Test Type</th>
+            <th>Acceptance Criteria</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td><strong>Electrical (ICT)</strong></td>
+            <td>All continuity, resistance, capacitance within spec</td>
+            <td>100% of boards</td>
+        </tr>
+        <tr>
+            <td><strong>Thermal Cycling</strong></td>
+            <td>3 cycles -20 to +60°C, no failures</td>
+            <td>10% sample</td>
+        </tr>
+        <tr>
+            <td><strong>Thermal Validation</strong></td>
+            <td>Core temp <75°C @ full load, 25°C ambient</td>
+            <td>100% of boards</td>
+        </tr>
+        <tr>
+            <td><strong>PCIe Compliance</strong></td>
+            <td>Link train @ Gen4 x16, eye diagram pass</td>
+            <td>Sample</td>
+        </tr>
+        <tr>
+            <td><strong>Memory Test</strong></td>
+            <td>March-YFFF pattern, zero errors</td>
+            <td>100% of boards</td>
+        </tr>
+        <tr>
+            <td><strong>Voltage Regulation</strong></td>
+            <td>Core ±3%, Mem ±2%, transient <50mV</td>
+            <td>100% of boards</td>
+        </tr>
+    </table>
+
+    <h2>Quality & Reliability</h2>
+    <div class="spec-box">
+        <strong>MTBF (Mean Time Between Failures):</strong><br>
+        Predicted: >50,000 hours @ rated conditions<br><br>
+
+        <strong>Environmental Testing:</strong><br>
+        ✓ ESD immunity: IEC 61000-4-2 Level 3 (6kV contact)<br>
+        ✓ EMI compliance: FCC Part 15 Class B<br>
+        ✓ RFI immunity: IEC 61000-4-3 Level 3<br>
+        ✓ Vibration: MIL-STD-810H (2G, 10-500 Hz)<br><br>
+
+        <strong>Workmanship Standard:</strong><br>
+        ✓ IPC-A-610E (Class 2 - General Industrial)<br>
+        ✓ IPC-7095 (BGA Assembly)<br>
+        ✓ No visible defects under 10x magnification<br>
+        ✓ Thermal paste coverage: 100% die area<br>
+    </div>
+
+    <div class="footer">
+        Document Version 1.0 | LightRail AI Proprietary | Page 13
+    </div>
+</div>
+
+<!-- BACK COVER -->
+<div class="page" style="text-align: center; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); border: 2px solid #003f7f;">
+    <h2 style="color: #003f7f; border: none; font-size: 1.8em;">LIGHTRAIL AI NCE</h2>
+    <p style="color: #0066cc; font-size: 1.3em; margin: 20px 0;">Reference Design Complete</p>
+
+    <div style="margin-top: 50px; color: #666; font-size: 0.95em;">
+        <p><strong>For Manufacturing Partners Only</strong></p>
+        <p style="margin-top: 30px;">This document contains complete specifications for the LightRail AI NCE Motherboard PCB design, manufacturing, and assembly.</p>
+        <p style="margin-top: 20px;">Contact: LightRail AI Engineering<br>
+        Version 1.0 | July 2026</p>
+    </div>
+
+    <div style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #003f7f;">
+        <p style="font-size: 0.85em; color: #999;">© 2026 LightRail AI. Proprietary and Confidential.</p>
+    </div>
+</div>
+
+<script>
+    // Add print styling
+    if (window.print) {
+        window.addEventListener('beforeprint', function() {
+            document.body.style.margin = '0';
+            document.body.style.padding = '0';
+        });
+    }
+</script>
+
+</body>
+</html>
