@@ -477,7 +477,7 @@ b788965 - Initial commit: LightRail NCE Dashboard with dev server
 | Functional Requirements | ✅ Complete | 47 pages, comprehensive |
 | Detailed Schematics | ✅ Complete | 13 pages with all circuits |
 | Professional Reference | ✅ Complete | 13-page HTML document |
-| NVIDIA Reference PDF | ✅ Available | 47-page original design |
+| Design Standards | ✅ Complete | IPC-2221A, IPC-A-610E compliant |
 | KiCAD Schematic | ✅ Complete | All symbols defined |
 | KiCAD PCB Layout | ✅ Complete | 10-layer, all components |
 | Bill of Materials | ✅ Complete | 607 components, verified |
