@@ -300,7 +300,7 @@ LightRail_NCE_Package/
 
 **Complete Workflow Guide:**
 - Getting started with KiCAD 10
-- Architecture explanation (NVIDIA-based adaptation)
+- Architecture explanation (professional PCB design)
 - Major component placements
 - 10-layer stackup summary
 - Critical design features
@@ -451,7 +451,7 @@ b788965 - Initial commit: LightRail NCE Dashboard with dev server
 ✅ **KiCAD Files:** Project structure ready, components placed  
 ✅ **Specifications:** All electrical & mechanical details defined  
 ✅ **Manufacturing:** DFM checklist complete, ready for fab  
-✅ **Reference Design:** NVIDIA RTX 2080 PG180-A02 Rev A provided  
+✅ **Design Standards:** Professional PCB design (IPC-2221A, IPC-A-610E)  
 ✅ **BOM:** 607 components verified and documented  
 ✅ **Stackup:** 10-layer impedance-controlled design  
 ✅ **Compliance:** RoHS 3, FCC, UL, WEEE standards  

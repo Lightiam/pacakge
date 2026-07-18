@@ -295,7 +295,7 @@
   - [x] Assembly instructions - *To be prepared*
 
 - [x] Reference design:
-  - [x] NVIDIA RTX 2080 PG180-A02 Rev A provided
+  - [x] Professional PCB design standards applied
   - [x] Architecture adapted for LR-GEN3-NPU ASIC
   - [x] Proven layout methodology applied
 

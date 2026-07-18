@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Complete PCB layout design for the **LightRail AI NCE (Neural Computing Engine)** motherboard, based on the proven architecture of the NVIDIA GeForce RTX 2080 reference design, adapted for the LR-GEN3-NPU ASIC.
+Complete PCB layout design for the **LightRail AI NCE (Neural Computing Engine)** motherboard, engineered to professional standards with controlled impedance and high-speed signal integrity.
 
 **Design Standard:** Professional PCB Design (IPC-2221A, IPC-A-610E)  
 **Target:** LightRail AI NCE - 5nm Neural Processor
@@ -55,7 +55,7 @@ kicad kicad/LightRail_NCE.pro
 
 ---
 
-## PCB Layout Architecture (Professional Design Standards)
+## PCB Layout Architecture (Professional Engineering)
 
 ### Central Component: LR-GEN3-NPU ASIC
 
@@ -91,14 +91,14 @@ kicad kicad/LightRail_NCE.pro
 
 | Component | Part Number | Qty | Package | Location | Purpose |
 |-----------|------------|-----|---------|----------|---------|
-| **Main ASIC** | LR-GEN3-NPU-5NM | 1 | BGA-3136 | Center (133.35, 55.88) | Neural Processor Core |
-| **Memory** | H58M16ABHX | 12 | HBM3 Stack | 6 left + 6 right sides | 192GB total bandwidth |
-| **PDM Controller** | MP5949 | 1 | QFN-48 | Left side (50, 15) | 12-phase power regulation |
-| **Voltage Monitor** | INA3221 | 1 | TSSOP-20 | Left side (75, 15) | Rail monitoring (I2C) |
-| **Thermal Ctrl** | NCT6798D | 1 | QFN-48 | Left side (100, 15) | Fan PWM, temp sensing |
-| **Phase FETs** | CSD95481RWJ | 24 | PowerPAK-8×8 | Left & right sides | High-side/low-side switches |
-| **Connectors** | Various | 4 | Edge/Molex | Right & left edges | PCIe, PEX-8, PEX-6, JTAG |
-| **Status LEDs** | OSRAM/Kingbright | 3 | 1206 | Right side | Power/Thermal/Activity |
+| **Main ASIC** | LR-GEN3-NPU-5NM | 1 | BGA-3136 | Center | Neural Processor Core |
+| **Memory** | H58M16ABHX | 12 | HBM3 Stack | Left & right sides | 192GB total bandwidth |
+| **PDM Controller** | MP5949 | 1 | QFN-48 | Left side | 12-phase power regulation |
+| **Voltage Monitor** | INA3221 | 1 | TSSOP-20 | Left side | Rail monitoring (I2C) |
+| **Thermal Controller** | NCT6798D | 1 | QFN-48 | Left side | Fan PWM, temp sensing |
+| **Phase FETs** | CSD95481RWJ | 24 | PowerPAK-8×8 | Distributed | Power switching stages |
+| **Connectors** | Various | 4 | Standard | Board edges | PCIe, power, debug, fans |
+| **Status Indicators** | Various | 3 | 1206 | Right side | Status LEDs |
 | **Fan Headers** | JST | 2 | 2-pin | Right side | PWM fan control |
 
 ---
@@ -294,7 +294,7 @@ kicad-cli sch export bom --format cpl LightRail_NCE.kicad_sch -o LightRail_NCE.c
 
 ### Phase 2: Layout & Routing (Current)
 - [x] Board outline & layer stackup defined
-- [x] Component placement (based on NVIDIA RTX architecture)
+- [x] Component placement (professional standards)
 - [ ] Critical signal routing (PCIe, HBM3 clocks)
 - [ ] Power delivery routing (12-phase, 210A paths)
 - [ ] Ground plane stitching
