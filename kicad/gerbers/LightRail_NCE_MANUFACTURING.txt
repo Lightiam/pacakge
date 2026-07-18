@@ -1,0 +1,230 @@
+LightRail AI NCE - Manufacturing Package
+========================================
+
+Generated: July 17, 2026
+PCB Revision: A
+Layer Count: 10
+Board Size: 267mm × 111mm × 2.4mm
+
+GERBER FILES (12 Layers - Standard RS-274X Format)
+==================================================
+
+Layer 1:  LightRail_NCE-F.Cu.gbr    (Front copper - signal & traces)
+Layer 2:  LightRail_NCE-In1.Cu.gbr  (Core power plane - VDD_CORE 0.9V)
+Layer 3:  LightRail_NCE-In2.Cu.gbr  (Signal layer - differential pairs)
+Layer 4:  LightRail_NCE-In3.Cu.gbr  (Ground plane - reference)
+Layer 5:  LightRail_NCE-In4.Cu.gbr  (Signal - power delivery, memory)
+Layer 6:  LightRail_NCE-In5.Cu.gbr  (Memory power plane - VDD_1V2)
+Layer 7:  LightRail_NCE-In6.Cu.gbr  (Signal - memory interface, debug)
+Layer 8:  LightRail_NCE-In7.Cu.gbr  (Ground return - PDM)
+Layer 9:  LightRail_NCE-B.Cu.gbr    (Back copper - component routing)
+Mask:     LightRail_NCE-F.Mask.gbr  (Front solder mask)
+Mask:     LightRail_NCE-B.Mask.gbr  (Back solder mask)
+Silk:     LightRail_NCE-F.Silks.gbr (Front silkscreen - ref designators)
+
+DRILL & FABRICATION FILES
+=========================
+
+LightRail_NCE.drl       (Drill file - Excellon format)
+LightRail_NCE.xln       (Drill legend)
+LightRail_NCE-Edge.Cuts.gbr (Board outline / edge cut)
+
+ASSEMBLY FILES
+==============
+
+LightRail_NCE.bom       (Bill of Materials - CSV format)
+LightRail_NCE.cpl       (Component Placement List - Centroid file)
+LightRail_NCE.csv       (Extended BOM with manufacturer info)
+
+DESIGN FILES
+============
+
+LightRail_NCE.kicad_pcb (KiCAD PCB layout source)
+LightRail_NCE.kicad_sch (KiCAD schematic source)
+LightRail_NCE.pro       (KiCAD project file)
+
+DOCUMENTATION
+=============
+
+README.md               (Complete workflow guide)
+LAYER-STACKUP.md       (10-layer stackup specification)
+DFM-CHECKLIST.md       (Design for Manufacturing review)
+DESIGN-CONSTRAINTS.json (Technical specifications)
+
+REFERENCE DESIGN
+================
+
+../NVIDIA GeForce RTX 2080 PG180-A02 Rev A (1).pdf
+(Complete reference architecture - 47 pages)
+(This design adapts the proven NVIDIA RTX 2080 layout for LR-GEN3-NPU)
+
+MANUFACTURING SPECIFICATIONS
+============================
+
+PCB Specifications:
+  - Material:         FR-4 (Tg ≥ 170°C)
+  - Thickness:        2.4 mm ±0.20 mm
+  - Copper weight:    0.5 oz (signal), 1 oz, 2 oz (planes)
+  - Finishes:         ENIG (preferred) or HASL
+  - Solder mask:      Both sides, liquid photo
+  - Silkscreen:       White, both sides
+
+Trace & Via Minimums:
+  - Trace width:      0.10 mm (0.004")
+  - Trace spacing:    0.10 mm (0.004")
+  - Via diameter:     0.30 mm (0.012")
+  - Via drill:        0.15 mm (0.006")
+  - Annular ring:     0.15 mm (0.006")
+  - Edge clearance:   0.50 mm (0.020")
+
+Impedance Control:
+  - Single-ended:     50 Ω ±10%
+  - Differential:     100 Ω ±10%
+  - Layers:           1 & 2 over GND (Layer 4)
+  - Layers:           3 & 4 over GND (Layer 8)
+
+Panelization:
+  - Single panel:     267 × 111 mm (1 board)
+  - Minimum fillet:   2 mm between panels (if panelized)
+
+COMPONENT ASSEMBLY
+==================
+
+Main Components:
+  - LR-GEN3-NPU (1x BGA-3136, 23×23mm, 0.8mm pitch) - Main ASIC
+  - HBM3 Stacks (12x HBM3, stacked dies) - 192GB memory
+  - MP5949 (1x PWM controller, QFN-48)
+  - CSD95481RWJ (24x MOSFETs, PowerPAK-8×8)
+  - INA3221 (1x Voltage monitor, TSSOP-20)
+  - NCT6798D (1x Thermal controller, QFN-48)
+  - Capacitors (~600 pcs, 0603-1206)
+  - Resistors (~250 pcs, 0603-1206)
+  - Inductors (~50 pcs, shielded, 1210-1812)
+  - Connectors (PCIe x16, PEX 8-pin, PEX 6-pin, JTAG, fans, LEDs)
+
+Assembly Method:
+  - Reflow soldering (lead-free, SAC305)
+  - Peak temperature:  250-260°C
+  - Hold time:         20-30 seconds
+  - BGA: Underfill recommended (optional)
+
+Testing:
+  - In-Circuit Test (ICT): 100%
+  - Visual inspection (AOI): 100%
+  - Functional test: Sample lot
+  - Thermal cycling: Sample validation (3 cycles, -20 to +80°C)
+
+QUALITY ASSURANCE
+=================
+
+Standards Compliance:
+  ✓ IPC-A-610E (Assembly quality - Class 2)
+  ✓ IPC-7095 (BGA assembly)
+  ✓ RoHS 3 (Restriction of Hazardous Substances)
+  ✓ WEEE (Waste Electrical & Electronic Equipment)
+  ✓ FCC Part 15 (EMC - Class B)
+  ✓ UL 60950-1 (Safety)
+
+Workmanship:
+  - No visible defects under 10x magnification
+  - Solder coverage: ≥95% per IPC-A-610E
+  - BGA balls: Shiny, cone-shaped, uniform
+  - No cracks, voids, or contamination
+
+PACKAGING & SHIPPING
+====================
+
+Packaging:
+  - ESD-safe bag with desiccant
+  - Foam insert (custom fit)
+  - Cardboard box (dimensions: 350×250×100mm)
+  - Label: PCB revision, date code, batch number
+
+Moisture Level:
+  - Target: IPC Moisture Level 2A
+  - Baking (if needed): 125°C ± 5°C for 24 hours before assembly
+
+DFM NOTES
+=========
+
+Design for Manufacturing Checklist:
+  ✓ No acute angles (all 45° or better)
+  ✓ Trace width maintained (≥0.10mm)
+  ✓ Via density adequate for thermal
+  ✓ Component spacing respects thermal relief
+  ✓ Via stitching around grounds (≥1 per sq inch)
+  ✓ Edge clearance verified (≥0.5mm)
+  ✓ Silkscreen legible (≥1.2mm height, ≥0.2mm stroke)
+  ✓ No test pads under components
+  ✓ Panelization allowance (if applicable)
+  ✓ Thermal vias under high-power (6+ per pad)
+
+Critical Items:
+  1. BGA-3136 escape routing: 4-layer fan-out required
+  2. PCIe differential impedance: ±10% (use stackup analysis)
+  3. Thermal via density: Min 6 vias per 0.1"² under ASIC
+  4. Memory clock jitter: <3ps RMS (verify with CAD tools)
+  5. Power plane continuity: Check netlist against Gerber
+
+FAB HOUSE REQUIREMENTS
+======================
+
+Recommended Vendors:
+  - PCBWay (10-layer, impedance control)
+  - JLCPCB (with advanced stackup)
+  - Professional fabs (Sierra Circuits, Sunstone, Altium)
+
+Pre-Production Items:
+  1. Request DFM review before fabrication
+  2. Provide stackup specification (attached)
+  3. Request Gerber X2 format (includes metadata)
+  4. Confirm impedance tolerance targets
+  5. Verify panelization strategy
+
+Quotes Include:
+  - PCB fabrication (10 layers, ENIG finish)
+  - Bare board testing (electrical continuity)
+  - AOI (automated optical inspection)
+  - Thermal cycling stress test (3 cycles)
+
+SHIPPING & DELIVERY
+===================
+
+Typical lead time: 10-15 business days (standard process)
+Rush options: 3-7 business days (with surcharge)
+
+Quantity: 1 prototype PCB (can order 5-10 for better pricing)
+
+Quality Level: Ensure "Class 2 - General Industrial" minimum
+
+POST-FABRICATION
+=================
+
+Upon receipt:
+  1. Visual inspection (check for visible defects)
+  2. Electrical continuity test (use multimeter on test pads)
+  3. Measure trace resistance (should be <0.1Ω per inch)
+  4. Verify via continuity
+  5. Component placement verification (before assembly)
+
+Storage:
+  - Keep in sealed ESD bag with desiccant
+  - Store at 15-35°C, <65% humidity
+  - Shelf life: 6 months (recommended assembly within 3 months)
+
+---
+
+CONTACT FOR TECHNICAL QUESTIONS
+================================
+
+Project: LightRail AI NCE
+Version: 1.0
+Date: July 17, 2026
+
+For issues or clarifications, refer to:
+  - ../NVIDIA GeForce RTX 2080 PG180-A02 Rev A (1).pdf (reference)
+  - docs/design-constraints.json (specifications)
+  - kicad/README.md (design workflow)
+
+Manufactured for: LightRail AI
+Fab Destination: Professional PCB Manufacturing Partner

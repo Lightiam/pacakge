@@ -1,0 +1,52 @@
+Reference,Value,Part Number,Manufacturer,Package,Quantity,Datasheet,Notes
+U1,LR-GEN3-NPU-5NM,LR-GEN3-NPU-5NM,LightRail AI,BGA-3136,1,LR-GEN3-NPU-DS-v2.3.pdf,Neural Processor Core - 5nm ASIC
+U2,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S0 (16Gb)
+U3,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S1 (16Gb)
+U4,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S2 (16Gb)
+U5,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S3 (16Gb)
+U6,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S4 (16Gb)
+U7,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S5 (16Gb)
+U8,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S6 (16Gb)
+U9,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S7 (16Gb)
+U10,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S8 (16Gb)
+U11,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S9 (16Gb)
+U12,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S10 (16Gb)
+U13,H58M16ABHX,H58M16ABHX,SK Hynix,HBM3-Stack,1,H58M16ABHX-Datasheet.pdf,HBM3 Memory Stack S11 (16Gb)
+U20,MP5949,MP5949,Monolithic Power Systems,QFN-48,1,MP5949-Datasheet.pdf,12-Phase PWM Controller - Primary PDM
+U21,INA3221,INA3221,Texas Instruments,TSSOP-20,1,INA3221-Datasheet.pdf,Triple-Channel Current/Voltage Monitor
+U22,NCT6798D,NCT6798D,Nuvoton,QFN-48,1,NCT6798D-Datasheet.pdf,Thermal Controller with PWM & Temp Sensing
+Q1,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,High-Side Phase FET 0 (115A @ 25C)
+Q2,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,Low-Side Phase FET 0 (115A @ 25C)
+Q3,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,High-Side Phase FET 1
+Q4,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,Low-Side Phase FET 1
+Q5,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,High-Side Phase FET 2
+Q6,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,Low-Side Phase FET 2
+Q7,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,High-Side Phase FET 3
+Q8,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,Low-Side Phase FET 3
+Q9,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,High-Side Phase FET 4
+Q10,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,Low-Side Phase FET 4
+Q11,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,High-Side Phase FET 5
+Q12,CSD95481RWJ,CSD95481RWJ,Texas Instruments,PowerPAK-8x8,1,CSD95481RWJ-Datasheet.pdf,Low-Side Phase FET 5
+J1,PCIe_x16,PCIe-x16-Connector,Standard,Edge-Connector-164pin,1,,PCI Express x16 Host Interface
+J2,PEX_8pin,Molex-5559-8pin,Molex,Connector-8pin,1,,8-pin Auxiliary Power Input (12V/5V)
+J3,PEX_6pin,Molex-5559-6pin,Molex,Connector-6pin,1,,6-pin Secondary Power Input (Optional)
+J4,JTAG_Header,2x7-Header-100mil,Standard,Header-14pin,1,,JTAG Debug Interface (IEEE 1149.1)
+J5,Fan_Connector_1,JST-PH-2pin,JST,Connector-2pin,1,,Fan PWM Control (Primary)
+J6,Fan_Connector_2,JST-PH-2pin,JST,Connector-2pin,1,,Fan PWM Control (Secondary)
+D1,Green_LED,OSRAM-LS_M67K,OSRAM,1206-SMD,1,,Status LED - Power OK (Green)
+D2,Yellow_LED,OSRAM-LY_M67K,OSRAM,1206-SMD,1,,Status LED - Thermal Warning (Yellow)
+D3,Blue_LED,OSRAM-LB_M67K,OSRAM,1206-SMD,1,,Status LED - Activity Indicator (Blue)
+C1,100uF/20V,GRM31CR61A107KA19L,Murata,1206,24,GRM31CR61A107KA19L.pdf,Bulk Capacitor - Input decoupling
+C2,47uF/6.3V,GRM31CR61A476KA19L,Murata,1206,48,GRM31CR61A476KA19L.pdf,Output Filtering - Phase capacitors
+C3,10uF/6.3V,GRM31CR60J106KA12L,Murata,1206,128,GRM31CR60J106KA12L.pdf,Decoupling - HBM3 stacks & ASIC
+C4,2.2uF/6.3V,GRM31CR60J225KA12L,Murata,1206,96,GRM31CR60J225KA12L.pdf,Bypass - Fast transient response
+C5,0.1uF/10V,GRM155R61A104KA01L,Murata,0402,256,GRM155R61A104KA01L.pdf,High-frequency bypass caps
+R1,1k/0.1W,CRCW04021K00FKED,Vishay,0402,128,CRCW04021K00FKED.pdf,Pull-up resistors (I2C/JTAG)
+R2,10k/0.1W,CRCW040210K0FKED,Vishay,0402,32,CRCW040210K0FKED.pdf,Bias resistors
+R3,100/0.1W,CRCW0402100RFKED,Vishay,0402,64,CRCW0402100RFKED.pdf,Series termination resistors
+L1,0.47uH/180A,SRP1308AER47M,Würth,1210,12,SRP1308AER47M.pdf,Phase Inductor (Power delivery)
+L2,1uH/150A,SRP1212AER10M,Würth,1210,8,SRP1212AER10M.pdf,Aux Power Inductor
+Y1,27MHz/50ppm,SG-531S,NDK,7x5mm,1,SG-531S.pdf,TCXO Reference Oscillator
+H1,M3-Mounting-Hole,,Standard,M3,4,,Mounting hole for mechanical bracket
+H2,M2.5-Thermal-Via,,Standard,M2.5,12,,Thermal via mounting (under ASIC)
+,,Total Component Count:,,,607,Total with all capacitors and resistors

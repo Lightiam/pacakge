@@ -348,7 +348,10 @@ kicad-cli sch export bom --format cpl LightRail_NCE.kicad_sch -o LightRail_NCE.c
 
 ## References
 
-- **NVIDIA RTX 2080 Reference:** PG180-A02 Rev A (architecture basis)
+- **NVIDIA GeForce RTX 2080 Reference Design:** PG180-A02 Rev A
+  - **File:** `../NVIDIA GeForce RTX 2080 PG180-A02 Rev A (1).pdf`
+  - **Status:** PRIMARY REFERENCE - Complete architecture, schematics, and layout
+  - **Adaptation:** LightRail AI NCE motherboard based on this proven design
 - **Design Constraints:** `docs/design-constraints.json`
 - **Layer Stackup:** `docs/LAYER-STACKUP.md`
 - **Placement Guide:** `docs/PLACEMENT-GUIDE.md`
