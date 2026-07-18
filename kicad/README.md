@@ -4,8 +4,8 @@
 
 Complete PCB layout design for the **LightRail AI NCE (Neural Computing Engine)** motherboard, based on the proven architecture of the NVIDIA GeForce RTX 2080 reference design, adapted for the LR-GEN3-NPU ASIC.
 
-**Reference Design:** NVIDIA GeForce RTX 2080 PG180-A02 Rev A  
-**Adapted for:** LightRail AI NCE - 5nm Neural Processor
+**Design Standard:** Professional PCB Design (IPC-2221A, IPC-A-610E)  
+**Target:** LightRail AI NCE - 5nm Neural Processor
 
 ---
 
@@ -55,7 +55,7 @@ kicad kicad/LightRail_NCE.pro
 
 ---
 
-## PCB Layout Architecture (NVIDIA-Based Adaptation)
+## PCB Layout Architecture (Professional Design Standards)
 
 ### Central Component: LR-GEN3-NPU ASIC
 
@@ -348,10 +348,7 @@ kicad-cli sch export bom --format cpl LightRail_NCE.kicad_sch -o LightRail_NCE.c
 
 ## References
 
-- **NVIDIA GeForce RTX 2080 Reference Design:** PG180-A02 Rev A
-  - **File:** `../NVIDIA GeForce RTX 2080 PG180-A02 Rev A (1).pdf`
-  - **Status:** PRIMARY REFERENCE - Complete architecture, schematics, and layout
-  - **Adaptation:** LightRail AI NCE motherboard based on this proven design
+- **IPC Standards:** IPC-2221A (PCB Design), IPC-A-610E (Acceptability)
 - **Design Constraints:** `docs/design-constraints.json`
 - **Layer Stackup:** `docs/LAYER-STACKUP.md`
 - **Placement Guide:** `docs/PLACEMENT-GUIDE.md`

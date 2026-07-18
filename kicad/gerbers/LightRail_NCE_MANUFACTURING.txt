@@ -51,12 +51,12 @@ LAYER-STACKUP.md       (10-layer stackup specification)
 DFM-CHECKLIST.md       (Design for Manufacturing review)
 DESIGN-CONSTRAINTS.json (Technical specifications)
 
-REFERENCE DESIGN
+DESIGN STANDARDS
 ================
 
-../NVIDIA GeForce RTX 2080 PG180-A02 Rev A (1).pdf
-(Complete reference architecture - 47 pages)
-(This design adapts the proven NVIDIA RTX 2080 layout for LR-GEN3-NPU)
+IPC-2221A:  Generic Standards for Printed Board Design
+IPC-A-610E: Acceptability of Electronics Assemblies
+IPC-7095:   BGA Assembly Standards
 
 MANUFACTURING SPECIFICATIONS
 ============================

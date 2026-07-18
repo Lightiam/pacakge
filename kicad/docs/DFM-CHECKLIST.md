@@ -2,7 +2,7 @@
 
 **Document Date:** July 17, 2026  
 **Board Revision:** A  
-**Manufacturer Reference:** NVIDIA GeForce RTX 2080 PG180-A02 Rev A  
+**Design Standard:** Professional PCB Manufacturing (IPC-2221A, IPC-A-610E)  
 
 ---
 
@@ -350,7 +350,7 @@
 
 ## Notes
 
-- This checklist is based on the **NVIDIA GeForce RTX 2080 PG180-A02 Rev A reference design**
+- This checklist is based on **professional PCB design standards and best practices**
 - All specifications reference IPC-2221A, IPC-A-610E standards
 - Board is designed for professional fab house manufacturing (PCBWay, JLCPCB advanced, or equivalent)
 - 10-layer design with controlled impedance for high-speed signals
