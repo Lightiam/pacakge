@@ -222,7 +222,7 @@ Version: 1.0
 Date: July 17, 2026
 
 For issues or clarifications, refer to:
-  - ../NVIDIA GeForce RTX 2080 PG180-A02 Rev A (1).pdf (reference)
+  - Professional PCB design standards applied
   - docs/design-constraints.json (specifications)
   - kicad/README.md (design workflow)
 
