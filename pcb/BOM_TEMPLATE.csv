@@ -1,0 +1,14 @@
+Designator,Value,Footprint,Package,Quantity,Supplier,Part Number,Unit Cost,Total Cost,Notes,Substitution Allowed
+R1,10k,0603,0603,1,JLCPCB,C99910,0.01,0.01,1/4W tolerace 5%,Yes
+R2,1k,0603,0603,1,JLCPCB,C25076,0.01,0.01,1/4W tolerance 5%,Yes
+C1,100nF,0603,0603,1,JLCPCB,C14663,0.01,0.01,Ceramic capacitor 16V,Yes
+C2,10µF,0805,0805,1,JLCPCB,C45783,0.05,0.05,Electrolytic capacitor 16V,Yes
+U1,STM32F103C8T6,LQFP48,LQFP48,1,JLCPCB,C8051,1.50,1.50,Microcontroller ARM Cortex-M3,No
+D1,1N4007,DO-41,DO-41,1,JLCPCB,C2564,0.02,0.02,Rectifier diode 1A 1000V,Yes
+LED1,Red LED,0603,0603,1,JLCPCB,C2286,0.02,0.02,2.0V 20mA,Yes
+SW1,Tactile Switch,SMD_6.2x6.2,6.2x6.2,1,JLCPCB,C92584,0.05,0.05,Momentary push button,Yes
+JP1,Header 2.54mm,1x2_THM,1x2,1,JLCPCB,C6451,0.05,0.05,Through-hole connector,Yes
+L1,10µH,1210,1210,1,JLCPCB,C3839,0.20,0.20,SMD inductor,Yes
+Q1,2N2222,TO-92,TO-92,1,JLCPCB,C3312,0.05,0.05,NPN BJT transistor,Yes
+IC1,LM7805,TO-220,TO-220,1,JLCPCB,C6186,0.30,0.30,Voltage regulator 5V,Yes
+,,,TOTAL,14,,,2.37,2.37,,
